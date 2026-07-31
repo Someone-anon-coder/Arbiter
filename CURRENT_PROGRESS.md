@@ -11,11 +11,11 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | Not started |
-| Current Concept | Not started |
-| Concepts Completed | 0 / 32 |
-| Sessions Completed | 0 |
-| Start Date | — |
+| Current Roadmap Category | 1 — Basics of Java |
+| Current Concept | Complete |
+| Concepts Completed | 1 / 32 |
+| Sessions Completed | 1 |
+| Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
 
@@ -45,7 +45,16 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 - Next session should cover:
 ```
 
-*(No sessions logged yet.)*
+### Session 1 — 2026-07-31
+- Phase: Daily Learning
+- Concept / Build Step: Category 1 — Basics of Java (JDK/environment, variables & data types, operators, type conversion/casting, I/O)
+- Problems given: (simple) declare 4 primitive types incl. int/float/char/boolean, assign literals, print with labels / (hard) Scanner-driven program reading name/age/height, converting height to meters, computing age+10, printing a combined summary line
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running with sample input. Notable: solved the nextInt()/nextLine() buffer pitfall by reading all input via nextLine() + parseInt/parseDouble rather than an extra flush call — a clean alternative, and the commented-out nextInt() attempt showed the pitfall was understood, not avoided by luck. Minor note (not an error): cast target in the height conversion was narrower (float) than necessary given a double source — worth remembering to cast only when the language requires it, not just to demonstrate a cast.
+- Struggles / notes: None. Also caught and fixed a repo documentation bug: README.md's stated file-naming convention (`java_1-basics.java`) used a hyphen, which is not a legal Java identifier character — file/class names can't compile with one. Convention corrected repo-wide to digit+PascalCase (`java_1Basics.java`) to match the author's actual (correct) file name; author self-caught this before submitting.
+- Next session should cover: Category 2 — Control Flow (if/else/else if, switch classic and arrow form, for/while/do-while, break/continue/labeled loops)
+
+*(Prior sessions: none.)*
 
 ---
 
@@ -55,7 +64,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 | # | Concept | Status | Date Completed |
 |---|---|---|---|
-| 1 | Basics of Java | ⬜ | |
+| 1 | Basics of Java | ✅ | 2026-07-31 |
 | 2 | Control Flow | ⬜ | |
 | 3 | Methods | ⬜ | |
 | 4 | OOP — Core | ⬜ | |
@@ -108,4 +117,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #1 — Basics of Java (see `ROADMAP.md`).
+**Next up:** Concept #2 — Control Flow (see `ROADMAP.md`).
