@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 1 — Basics of Java |
+| Current Roadmap Category | 2 — Control Flow |
 | Current Concept | Complete |
-| Concepts Completed | 1 / 32 |
-| Sessions Completed | 1 |
+| Concepts Completed | 2 / 32 |
+| Sessions Completed | 2 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 2 — 2026-07-31
+- Phase: Daily Learning
+- Concept / Build Step: Category 2 — Control Flow (if/else/else if, switch classic and arrow form, for/while/do-while, break/continue/labeled loops)
+- Problems given: (simple) score-to-letter-grade via if/else if/else, run across all five grade bands / (hard) 4x4 grid scan using nested for loops + switch on cell code + labeled break to halt both loops the instant a target cell is found
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. Problem 1 covered all five grade bands twice over (array sweep + commented-out single-value alternates). Problem 2's labeled break was proven to actually work, not just compile: target sat at (2,3) with an unscanned obstacle-bearing row (row 3) still remaining, and that row never printed — confirming `break found;` exited both the switch and both loops rather than just the switch. Minor cosmetic-only note: output format used "(0,2)" instead of the spec's "(0, 2)" and added an extra leading blank line before the target-found message — noted but not worth a resubmission.
+- Struggles / notes: None.
+- Next session should cover: Category 3 — Methods (declaration/parameters/return values, overloading, varargs, recursion, pass-by-value semantics)
 
 **Template:**
 ```
@@ -65,7 +74,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | # | Concept | Status | Date Completed |
 |---|---|---|---|
 | 1 | Basics of Java | ✅ | 2026-07-31 |
-| 2 | Control Flow | ⬜ | |
+| 2 | Control Flow | ✅ | 2026-07-31 |
 | 3 | Methods | ⬜ | |
 | 4 | OOP — Core | ⬜ | |
 | 5 | OOP — Advanced | ⬜ | |
@@ -117,4 +126,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #2 — Control Flow (see `ROADMAP.md`).
+**Next up:** Concept #3 — Methods (see `ROADMAP.md`).

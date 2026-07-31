@@ -14,11 +14,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Type conversion / casting
 - [x] Input / Output (Scanner, System.out)
 
-## 2. Control Flow ⬜
-- [ ] `if`, `else`, `else if`
-- [ ] `switch` (classic and enhanced/arrow form)
-- [ ] `for`, `while`, `do-while` loops
-- [ ] `break`, `continue`, labeled loops
+## 2. Control Flow ✅
+- [x] `if`, `else`, `else if`
+- [x] `switch` (classic and enhanced/arrow form)
+- [x] `for`, `while`, `do-while` loops
+- [x] `break`, `continue`, labeled loops
 
 ## 3. Methods ⬜
 - [ ] Method declaration, parameters, return values
