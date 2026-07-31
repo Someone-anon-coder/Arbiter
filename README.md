@@ -59,9 +59,9 @@ Full architecture is documented in `PROJECT_PLAN.md` — locked until the Daily 
 ├── Images/                    # Diagrams referenced in explanations
 ├── arbiter/                   # The actual Arbiter multi-service project (Project Build Phase)
 │
-├── java_1-basics.java
-├── java_2-control_flow.java
-├── java_3-methods.java
+├── java_1Basics.java
+├── java_2ControlFlow.java
+├── java_3Methods.java
 ├── ...                        # One file per concept, numbered in learning order
 │
 └── pom.xml / build files
@@ -79,8 +79,8 @@ cd Java
 Each numbered concept file is self-contained and runnable on its own:
 
 ```bash
-javac java_1-basics.java
-java java_1-basics
+javac java_1Basics.java
+java java_1Basics
 ```
 
 Once the Project Build Phase begins, `arbiter/` becomes a proper Maven multi-module project with its own build/run instructions (added at that point).

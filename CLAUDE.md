@@ -103,6 +103,7 @@ Once `PROJECT_PLAN.md` is unlocked:
 **At the end of every session:**
 - [ ] Update `CURRENT_PROGRESS.md`: mark the concept/step complete (or in-progress with notes), log the evaluation outcome, note anything the author struggled with, state what the next session should cover.
 - [ ] If this session completed a full roadmap category, flag it so `ROADMAP.md` can be checked off.
+- [ ] Output the End-of-Session Brief per Section 9, as the final thing in the session.
 
 ---
 
@@ -123,3 +124,37 @@ Once `PROJECT_PLAN.md` is unlocked:
 - Skip the explain → problems → wait → evaluate sequence.
 - Move to a new concept before the current one's problems are evaluated.
 - Inflate or deflate an evaluation to be encouraging or harsh — evaluate what's actually there.
+
+---
+
+## 9. End-of-Session Brief
+
+At the very end of every session — after `CURRENT_PROGRESS.md`, `ROADMAP.md`, and any other files have been updated — output a single consolidated brief in the chat response, in the exact format below. This is what gets pasted back to Claude (chat) to write the next session's prompt, so it must be self-contained: someone reading only this block, with no file access, should know what happened.
+
+### Format
+
+```
+SESSION BRIEF — Session <N>
+Date: <date>
+Phase: Daily Learning / Project Build
+Concept / Build Step: <name>
+
+Outcome: <Correct / Correct with rework / Needed a second attempt>
+
+Evaluation notes: <2-4 sentences max — what mattered, not a full replay>
+
+Files changed: <code files, docs, new Explanations file, etc.>
+
+Repo/doc corrections made (if any): <anything structural fixed — naming
+convention, process gap, plan error — flag clearly, this is signal Claude
+should account for going forward. "None" if nothing.>
+
+Flags for Curriculum Architect: <anything Claude should know before writing
+the next prompt — a recurring struggle, a concept worth revisiting, a
+pacing note. "None" if nothing.>
+
+Next session target: <exact next category/step per ROADMAP.md or
+PROJECT_PLAN.md>
+```
+
+Keep this brief tight — it is a handoff document, not a transcript. Do not paste full code, full diffs, or the full `CURRENT_PROGRESS.md` entry into it; summarize. Full detail already lives in the repo files; the brief's only job is to make the next prompt possible without re-reading everything.

@@ -7,12 +7,12 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 
 ---
 
-## 1. Basics of Java ⬜
-- [ ] Setting up JDK, JAVA_HOME, running a first program
-- [ ] Variables and data types (primitives vs. reference types)
-- [ ] Operators
-- [ ] Type conversion / casting
-- [ ] Input / Output (Scanner, System.out)
+## 1. Basics of Java ✅
+- [x] Setting up JDK, JAVA_HOME, running a first program
+- [x] Variables and data types (primitives vs. reference types)
+- [x] Operators
+- [x] Type conversion / casting
+- [x] Input / Output (Scanner, System.out)
 
 ## 2. Control Flow ⬜
 - [ ] `if`, `else`, `else if`
