@@ -33,12 +33,12 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Encapsulation (access modifiers, getters/setters)
 - [x] Static vs. instance members
 
-## 5. Object-Oriented Programming — Advanced ⬜
+## 5. Object-Oriented Programming — Advanced ✅
 - [x] Inheritance
 - [x] Polymorphism (overriding, dynamic dispatch)
-- [ ] Abstraction (abstract classes)
-- [ ] Interfaces (including default/static methods)
-- [ ] `equals()`, `hashCode()`, `toString()`
+- [x] Abstraction (abstract classes)
+- [x] Interfaces (including default/static methods)
+- [x] `equals()`, `hashCode()`, `toString()`
 
 ## 6. Arrays & Core Collections ⬜
 - [ ] Arrays (1D, 2D, multi-dimensional)
