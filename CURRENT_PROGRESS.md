@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 4 — OOP Core |
-| Current Concept | Complete |
+| Current Roadmap Category | 5 — OOP Advanced |
+| Current Concept | In Progress (Inheritance & Polymorphism done; Abstraction, Interfaces, equals/hashCode/toString pending) |
 | Concepts Completed | 4 / 32 |
-| Sessions Completed | 4 |
+| Sessions Completed | 5 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 5 — 2026-08-01
+- Phase: Daily Learning
+- Concept / Build Step: Category 5 — OOP Advanced, part 1 of 2 (Inheritance; Polymorphism — overriding, dynamic dispatch). Abstraction, interfaces, and `equals()`/`hashCode()`/`toString()` deferred to a follow-up session before Category 5 is checked off as complete.
+- Problems given: (simple) `Shape` base class with `area()`, `Circle extends Shape` overriding `area()`, called through a `Shape`-declared reference pointing at a `Circle` object / (hard) `Employee` base class with `calculatePay()`, subclasses `Manager` and `Contractor` overriding it with different formulas and `Intern` inheriting it unchanged, traversed via a shuffled `Employee[]` using only base-typed access (no `instanceof`, no casting) to compute and sum per-employee pay
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. `Circle`'s overridden `area()` (78.5398...) ran correctly through a `Shape`-declared reference, not `Shape`'s generic default. The hard problem's payroll loop touched every employee only through the `Employee`-typed array and called `calculatePay()` directly — no type-checking workaround anywhere — and each subclass's own formula still ran correctly (Manager 26000, Contractor1 77000, Contractor2 200000, Interns unchanged at their base salaries), with the printed total (333000) matching the hand-summed total exactly. This is the thing the exercise was actually testing: correctness that could only come from dynamic dispatch. One minor genuine (non-blocking) note: `calculatePay()` is called twice per loop iteration (once to print, once to accumulate) where storing the result in a local variable once would avoid the redundant call — flagged as a real but small efficiency point, not a correctness issue.
+- Struggles / notes: None.
+- Next session should cover: Category 5 remainder — Abstraction (abstract classes), Interfaces (including default/static methods), `equals()`/`hashCode()`/`toString()`. Category 5 heading stays unchecked in ROADMAP.md until that session completes it.
 
 ### Session 4 — 2026-08-01
 - Phase: Daily Learning
@@ -95,7 +104,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 2 | Control Flow | ✅ | 2026-07-31 |
 | 3 | Methods | ✅ | 2026-08-01 |
 | 4 | OOP — Core | ✅ | 2026-08-01 |
-| 5 | OOP — Advanced | ⬜ | |
+| 5 | OOP — Advanced | 🟡 (Inheritance, Polymorphism done) | |
 | 6 | Arrays & Core Collections | ⬜ | |
 | 7 | Strings & Text Processing | ⬜ | |
 | 8 | Exception Handling | ⬜ | |
@@ -144,4 +153,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #5 — OOP Advanced (see `ROADMAP.md`).
+**Next up:** Concept #5 — OOP Advanced, part 2 of 2: Abstraction (abstract classes), Interfaces (including default/static methods), `equals()`/`hashCode()`/`toString()` (see `ROADMAP.md`).

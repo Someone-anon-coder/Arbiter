@@ -34,8 +34,8 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Static vs. instance members
 
 ## 5. Object-Oriented Programming — Advanced ⬜
-- [ ] Inheritance
-- [ ] Polymorphism (overriding, dynamic dispatch)
+- [x] Inheritance
+- [x] Polymorphism (overriding, dynamic dispatch)
 - [ ] Abstraction (abstract classes)
 - [ ] Interfaces (including default/static methods)
 - [ ] `equals()`, `hashCode()`, `toString()`
