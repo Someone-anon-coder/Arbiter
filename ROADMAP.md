@@ -20,12 +20,12 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] `for`, `while`, `do-while` loops
 - [x] `break`, `continue`, labeled loops
 
-## 3. Methods ⬜
-- [ ] Method declaration, parameters, return values
-- [ ] Method overloading
-- [ ] Varargs
-- [ ] Recursion
-- [ ] Pass-by-value semantics in Java
+## 3. Methods ✅
+- [x] Method declaration, parameters, return values
+- [x] Method overloading
+- [x] Varargs
+- [x] Recursion
+- [x] Pass-by-value semantics in Java
 
 ## 4. Object-Oriented Programming — Core ⬜
 - [ ] Classes and objects

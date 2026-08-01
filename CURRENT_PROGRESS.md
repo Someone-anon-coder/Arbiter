@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 2 — Control Flow |
+| Current Roadmap Category | 3 — Methods |
 | Current Concept | Complete |
-| Concepts Completed | 2 / 32 |
-| Sessions Completed | 2 |
+| Concepts Completed | 3 / 32 |
+| Sessions Completed | 3 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 3 — 2026-08-01
+- Phase: Daily Learning
+- Concept / Build Step: Category 3 — Methods (declaration/parameters/return values, overloading, varargs, recursion, pass-by-value semantics)
+- Problems given: (simple) overloaded `describe` method (single int / two ints / String label + int varargs, including zero-arg and 5-arg calls) / (hard) recursive `flattenAndSum(int[][] grid, int[] runningMax)` over a jagged 2D array with no loops permitted, requiring a helper recursive method, plus a required demonstration of reassigning the array parameter (`flattenAndSumBroken`) to prove the caller's array is unaffected
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running (sum = 23, max = 9, hand-checked). Recursion used two cooperating private helper methods (row recursion calling column recursion) with zero loops anywhere, satisfying the constraint. The pass-by-value demonstration was genuinely proven, not just asserted: `flattenAndSumBroken` reassigned its `runningMax` parameter to a new array, and the printed output confirmed the caller's original array in `main` still held `Integer.MIN_VALUE` afterward — correctly distinguishing "mutate through the reference" from "reassign the parameter" for reference types.
+- Struggles / notes: None.
+- Next session should cover: Category 4 — OOP Core (classes and objects, constructors, `this`, encapsulation/access modifiers/getters-setters, static vs. instance members)
 
 ### Session 2 — 2026-07-31
 - Phase: Daily Learning
@@ -75,7 +84,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 |---|---|---|---|
 | 1 | Basics of Java | ✅ | 2026-07-31 |
 | 2 | Control Flow | ✅ | 2026-07-31 |
-| 3 | Methods | ⬜ | |
+| 3 | Methods | ✅ | 2026-08-01 |
 | 4 | OOP — Core | ⬜ | |
 | 5 | OOP — Advanced | ⬜ | |
 | 6 | Arrays & Core Collections | ⬜ | |
@@ -126,4 +135,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #3 — Methods (see `ROADMAP.md`).
+**Next up:** Concept #4 — OOP Core (see `ROADMAP.md`).
