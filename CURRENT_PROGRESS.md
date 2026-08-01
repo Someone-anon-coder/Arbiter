@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 3 — Methods |
+| Current Roadmap Category | 4 — OOP Core |
 | Current Concept | Complete |
-| Concepts Completed | 3 / 32 |
-| Sessions Completed | 3 |
+| Concepts Completed | 4 / 32 |
+| Sessions Completed | 4 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 4 — 2026-08-01
+- Phase: Daily Learning
+- Concept / Build Step: Category 4 — OOP Core (classes/objects, constructors, `this`, encapsulation/access modifiers/getters-setters, static vs. instance members)
+- Problems given: (simple) `Book` class with private fields, constructor, getters, and a `setPages` setter that rejects values < 1 without crashing / (hard) `BankAccount` class combining instance state (owner, balance, auto-assigned sequential id) with static state (shared running total balance across all accounts, static id counter), requiring deposit/withdraw to keep both in sync and a rejected over-withdrawal to change nothing
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. `Book`'s two instances stayed fully independent, and the rejected `-5` setter call left the original value (37) untouched. `BankAccount` correctly separated instance fields from static fields: account ids were unique/sequential via a static counter, and the static running total was proven to track combined state across all three instances (not just one) — after a deposit, a successful withdrawal, and a rejected over-withdrawal, the printed static total (9000.0) matched the hand-summed individual balances (3000 + 1000 + 5000). No rework needed.
+- Struggles / notes: None.
+- Next session should cover: Category 5 — OOP Advanced (inheritance, polymorphism, abstraction/abstract classes, interfaces including default/static methods, `equals()`/`hashCode()`/`toString()`)
 
 ### Session 3 — 2026-08-01
 - Phase: Daily Learning
@@ -85,7 +94,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 1 | Basics of Java | ✅ | 2026-07-31 |
 | 2 | Control Flow | ✅ | 2026-07-31 |
 | 3 | Methods | ✅ | 2026-08-01 |
-| 4 | OOP — Core | ⬜ | |
+| 4 | OOP — Core | ✅ | 2026-08-01 |
 | 5 | OOP — Advanced | ⬜ | |
 | 6 | Arrays & Core Collections | ⬜ | |
 | 7 | Strings & Text Processing | ⬜ | |
@@ -135,4 +144,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #4 — OOP Core (see `ROADMAP.md`).
+**Next up:** Concept #5 — OOP Advanced (see `ROADMAP.md`).
