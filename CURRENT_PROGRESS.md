@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 5 — OOP Advanced |
-| Current Concept | In Progress (Inheritance & Polymorphism done; Abstraction, Interfaces, equals/hashCode/toString pending) |
-| Concepts Completed | 4 / 32 |
-| Sessions Completed | 5 |
+| Current Roadmap Category | 6 — Arrays & Core Collections |
+| Current Concept | Not started |
+| Concepts Completed | 5 / 32 |
+| Sessions Completed | 6 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 6 — 2026-08-01
+- Phase: Daily Learning
+- Concept / Build Step: Category 5 — OOP Advanced, part 2 of 2 (Abstraction/abstract classes; Interfaces including default/static methods; `equals()`/`hashCode()`/`toString()`). Completes Category 5.
+- Problems given: (simple) `Greeter` interface with one abstract method (`greet`) and one default method (`greetLoudly`), implemented by a single `FriendlyGreeter` class, both called and printed / (hard) `Catalogable` interface implemented by abstract class `LibraryItem` (which also declares an abstract `lateFeePerDay()`), concrete subclasses `Book` and `DVD`, with `equals()`/`hashCode()`/`toString()` overridden on `LibraryItem` using `isbn` alone — proven by storing 4 items (including a deliberate by-value duplicate, different object/subclass, same isbn) in a `HashSet` and as `HashMap` keys, then looking up a third never-stored object with a matching isbn
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. `equals()`/`hashCode()` were both derived from the same field (`isbn`), which is what made them internally consistent. The `HashSet` collapsed 4 additions to size 3 with the isbn-duplicate visibly appearing once in the printed contents (keeping the first-inserted object, correct `HashSet.add()` semantics); the `HashMap` case additionally showed `put()`'s keeps-last-value overwrite behavior on an equal key. The real proof was the final lookup: a third, never-stored object sharing the duplicate isbn was used to `HashMap.get(...)` and correctly returned the stored fee — only possible if hashCode-based bucketing and equals-based matching agreed, i.e., genuine proof by successful lookup rather than an asserted claim.
+- Struggles / notes: None.
+- Next session should cover: Category 6 — Arrays & Core Collections (1D/2D/multi-dimensional arrays, and core collections per ROADMAP.md).
 
 ### Session 5 — 2026-08-01
 - Phase: Daily Learning
@@ -104,7 +113,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 2 | Control Flow | ✅ | 2026-07-31 |
 | 3 | Methods | ✅ | 2026-08-01 |
 | 4 | OOP — Core | ✅ | 2026-08-01 |
-| 5 | OOP — Advanced | 🟡 (Inheritance, Polymorphism done) | |
+| 5 | OOP — Advanced | ✅ | 2026-08-01 |
 | 6 | Arrays & Core Collections | ⬜ | |
 | 7 | Strings & Text Processing | ⬜ | |
 | 8 | Exception Handling | ⬜ | |
@@ -153,4 +162,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #5 — OOP Advanced, part 2 of 2: Abstraction (abstract classes), Interfaces (including default/static methods), `equals()`/`hashCode()`/`toString()` (see `ROADMAP.md`).
+**Next up:** Concept #6 — Arrays & Core Collections (see `ROADMAP.md`).
