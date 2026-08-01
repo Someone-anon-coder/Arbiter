@@ -27,11 +27,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Recursion
 - [x] Pass-by-value semantics in Java
 
-## 4. Object-Oriented Programming — Core ⬜
-- [ ] Classes and objects
-- [ ] Constructors, `this`
-- [ ] Encapsulation (access modifiers, getters/setters)
-- [ ] Static vs. instance members
+## 4. Object-Oriented Programming — Core ✅
+- [x] Classes and objects
+- [x] Constructors, `this`
+- [x] Encapsulation (access modifiers, getters/setters)
+- [x] Static vs. instance members
 
 ## 5. Object-Oriented Programming — Advanced ⬜
 - [ ] Inheritance
