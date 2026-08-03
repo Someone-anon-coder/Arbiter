@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 6 — Arrays & Core Collections |
-| Current Concept | Not started |
-| Concepts Completed | 5 / 32 |
-| Sessions Completed | 6 |
+| Current Roadmap Category | 6 — Arrays & Core Collections (in progress) |
+| Current Concept | Arrays, ArrayList/LinkedList, Iterator — done; Map/Set + collection choice pending |
+| Concepts Completed | 5 / 32 (Category 6 partially done, not yet counted) |
+| Sessions Completed | 7 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 7 — 2026-08-03
+- Phase: Daily Learning
+- Concept / Build Step: Category 6 — Arrays & Core Collections, part 1 of 2 (Arrays 1D/2D/multi-dimensional; `ArrayList` vs `LinkedList` internals and real performance tradeoffs; `Iterator` protocol and `ConcurrentModificationException`). `HashMap`/`TreeMap`/`LinkedHashMap`, `HashSet`/`TreeSet`, and collection-choice reasoning deferred to a follow-up session before Category 6 is checked off complete.
+- Problems given: (simple) ring-sum of a 5x5 `int[][]` (sum each concentric border ring, plus grand total cross-checked against a plain full traversal) / (hard) single-pass in-place removal from an `ArrayList<Integer>` of all negative-or-divisible-by-7 elements via `Iterator.remove()` (no second collection), then re-processing the survivors into a `LinkedList<Integer>` via `addFirst`/`addLast` (even → front, odd → back)
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. Ring sums (208, 104, 13) summed to 325, matching a plain full-traversal total exactly — proof by cross-check, not assertion. The hard problem used genuine `Iterator.remove()` (called on the iterator right after `next()`, not a manual index-shift workaround), correctly filtering to `1 1 15 27 27 39 41 47 50 22` with no `ConcurrentModificationException` and no silently-skipped elements. `LinkedList.addFirst`/`addLast` were used for the front/back-loading pass — genuinely O(1) operations that play to `LinkedList`'s actual strength, not an arbitrary structure choice. One cosmetic-only typo noted ("travelsal" instead of "traversal"), not worth resubmitting for.
+- Struggles / notes: None.
+- Next session should cover: Category 6 remainder — `HashMap`, `TreeMap`, `LinkedHashMap`, `HashSet`, `TreeSet`, and choosing the right collection for a problem. Category 6 heading stays unchecked in ROADMAP.md until that session completes it.
 
 ### Session 6 — 2026-08-01
 - Phase: Daily Learning
@@ -162,4 +171,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #6 — Arrays & Core Collections (see `ROADMAP.md`).
+**Next up:** Concept #6 remainder — `HashMap`/`TreeMap`/`LinkedHashMap`, `HashSet`/`TreeSet`, and choosing the right collection for a problem (see `ROADMAP.md`). Category 6 stays open until this completes.
