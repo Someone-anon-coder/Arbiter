@@ -41,11 +41,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] `equals()`, `hashCode()`, `toString()`
 
 ## 6. Arrays & Core Collections ⬜
-- [ ] Arrays (1D, 2D, multi-dimensional)
-- [ ] `ArrayList`, `LinkedList`
+- [x] Arrays (1D, 2D, multi-dimensional)
+- [x] `ArrayList`, `LinkedList`
 - [ ] `HashMap`, `TreeMap`, `LinkedHashMap`
 - [ ] `HashSet`, `TreeSet`
-- [ ] Iterating collections, `Iterator`
+- [x] Iterating collections, `Iterator`
 - [ ] Choosing the right collection for a problem
 
 ## 7. Strings & Text Processing ⬜
