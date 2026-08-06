@@ -40,13 +40,13 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Interfaces (including default/static methods)
 - [x] `equals()`, `hashCode()`, `toString()`
 
-## 6. Arrays & Core Collections ⬜
+## 6. Arrays & Core Collections ✅
 - [x] Arrays (1D, 2D, multi-dimensional)
 - [x] `ArrayList`, `LinkedList`
-- [ ] `HashMap`, `TreeMap`, `LinkedHashMap`
-- [ ] `HashSet`, `TreeSet`
+- [x] `HashMap`, `TreeMap`, `LinkedHashMap`
+- [x] `HashSet`, `TreeSet`
 - [x] Iterating collections, `Iterator`
-- [ ] Choosing the right collection for a problem
+- [x] Choosing the right collection for a problem
 
 ## 7. Strings & Text Processing ⬜
 - [ ] String immutability, `String` vs `StringBuilder` vs `StringBuffer`

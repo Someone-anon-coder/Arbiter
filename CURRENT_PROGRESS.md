@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 6 — Arrays & Core Collections (in progress) |
-| Current Concept | Arrays, ArrayList/LinkedList, Iterator — done; Map/Set + collection choice pending |
-| Concepts Completed | 5 / 32 (Category 6 partially done, not yet counted) |
-| Sessions Completed | 7 |
+| Current Roadmap Category | 7 — Strings & Text Processing (not started) |
+| Current Concept | Category 6 complete; awaiting next session's concept |
+| Concepts Completed | 6 / 32 |
+| Sessions Completed | 8 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 8 — 2026-08-06
+- Phase: Daily Learning
+- Concept / Build Step: Category 6 — Arrays & Core Collections, part 2 of 2 (`HashMap`/`TreeMap`/`LinkedHashMap`, `HashSet`/`TreeSet`, choosing the right collection). Completes Category 6.
+- Problems given: (simple) word-frequency counter over a fixed 12-word array using `HashMap<String, Integer>` with `getOrDefault` accumulation, printing each word's count and the distinct-word total / (hard) event-log analysis over 10 (name, severity) pairs requiring three reports from the same data in one run: first-seen-order occurrence counts, severity-ascending order with alphabetical tie-break, and the single highest occurrence-count×severity event — deliberately requiring `LinkedHashMap` for the first report and a `TreeMap` with a custom `Comparator` for the second, since neither is `String`'s natural order.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running — all output matched expected values exactly, including the `retry(5)` before `timeout(5)` tie-break. `LinkedHashMap` was used (and correctly reused) for both the occurrence-count and first-seen-order reports since both need insertion order. The severity report used `TreeMap` with a `Comparator` lambda comparing by severity first, then falling back to `a.compareTo(b)` alphabetically on a tie — the right call since severity isn't `String`'s natural ordering, so `Comparable` alone couldn't have done it. `putIfAbsent` was used to collapse the per-name severity lookup to one value per distinct name before sorting. No manufactured improvements — the solution was clean and each collection choice was deliberate, not incidental.
+- Struggles / notes: None.
+- Next session should cover: Category 7 — Strings & Text Processing (`String` immutability and `String` vs `StringBuilder` vs `StringBuffer`; common `String` methods; string formatting; regular expressions with `Pattern`/`Matcher`).
 
 ### Session 7 — 2026-08-03
 - Phase: Daily Learning
@@ -123,7 +132,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 3 | Methods | ✅ | 2026-08-01 |
 | 4 | OOP — Core | ✅ | 2026-08-01 |
 | 5 | OOP — Advanced | ✅ | 2026-08-01 |
-| 6 | Arrays & Core Collections | ⬜ | |
+| 6 | Arrays & Core Collections | ✅ | 2026-08-06 |
 | 7 | Strings & Text Processing | ⬜ | |
 | 8 | Exception Handling | ⬜ | |
 | 9 | Generics | ⬜ | |
@@ -171,4 +180,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Concept #6 remainder — `HashMap`/`TreeMap`/`LinkedHashMap`, `HashSet`/`TreeSet`, and choosing the right collection for a problem (see `ROADMAP.md`). Category 6 stays open until this completes.
+**Next up:** Category 7 — Strings & Text Processing: `String` immutability and `String` vs `StringBuilder` vs `StringBuffer`; common `String` methods; string formatting; regular expressions (`Pattern`, `Matcher`) (see `ROADMAP.md`).
