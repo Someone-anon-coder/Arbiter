@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 7 — Strings & Text Processing (not started) |
-| Current Concept | Category 6 complete; awaiting next session's concept |
+| Current Roadmap Category | 7 — Strings & Text Processing (in progress — 3 of 4 sub-items done) |
+| Current Concept | String immutability/StringBuilder/StringBuffer, common String methods, string formatting — complete; regular expressions (Pattern/Matcher) remaining |
 | Concepts Completed | 6 / 32 |
-| Sessions Completed | 8 |
+| Sessions Completed | 9 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 9 — 2026-08-11
+- Phase: Daily Learning
+- Concept / Build Step: Category 7 — Strings & Text Processing, part 1 of 2 (String immutability; `String` vs `StringBuilder` vs `StringBuffer`, including `insert()`/`delete()`; common `String` methods; string formatting via `String.format`). Regular expressions (`Pattern`/`Matcher`) deferred to a follow-up session before Category 7 is checked off complete.
+- Problems given: (simple) normalize whitespace and capitalize each word of a fixed sentence using only `String` methods, then print a `String.format` summary line with word count and character count (excluding spaces) / (hard) single-pass in-place mutation of one `StringBuilder` built from `"a1b22c333d4e55f6g777h8i99j0"` — `insert()` a `*` marker after every lowercase letter and `deleteCharAt()` every digit that is the 2nd+ in a run of consecutive digits — followed by a `String.format` report of original length, final length, markers inserted, and digits deleted.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running, and independently hand-traced index-by-index against the actual buffer mutations. Problem 1 correctly collapsed whitespace and capitalized all 9 words; character count (36) correctly summed only letters, not spaces. Problem 2 was the real test of the exercise: it used a single `StringBuilder`, mutating it in place via `insert()`/`deleteCharAt()`, with no second buffer or concatenation-built result anywhere. The `i--` after each deletion (to re-examine the character that shifted into the current index) and the implicit skip-forward over a freshly inserted marker were both handled correctly, so runs of 2 or 3 digits collapsed to exactly one survivor each (7 total deletions) and all 10 lowercase letters got a marker — genuine in-place buffer manipulation, not output that merely happened to match. One minor, non-blocking style note: the `String.format` summary for Problem 1 embeds `%n`-equivalent `\n` inside the format string and then the result is also passed to `println`, producing a doubled blank line — worth remembering that `String.format` output and `println` each add their own line break, so only one is usually needed.
+- Struggles / notes: None. Problem 1 used `String.replaceAll("\\s{2,}", " ")` to collapse whitespace — a legitimate `String` method, but one whose argument is a regex, a topic formally deferred to the next session. Not an error and not flagged as one, but noted for the Curriculum Architect below.
+- Next session should cover: Category 7 remainder — regular expressions (`Pattern`, `Matcher`). Category 7 heading stays unchecked in ROADMAP.md until that session completes it.
 
 ### Session 8 — 2026-08-06
 - Phase: Daily Learning
@@ -133,7 +142,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 4 | OOP — Core | ✅ | 2026-08-01 |
 | 5 | OOP — Advanced | ✅ | 2026-08-01 |
 | 6 | Arrays & Core Collections | ✅ | 2026-08-06 |
-| 7 | Strings & Text Processing | ⬜ | |
+| 7 | Strings & Text Processing | 🟡 | |
 | 8 | Exception Handling | ⬜ | |
 | 9 | Generics | ⬜ | |
 | 10 | Java 8+ Functional Features | ⬜ | |
@@ -180,4 +189,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 7 — Strings & Text Processing: `String` immutability and `String` vs `StringBuilder` vs `StringBuffer`; common `String` methods; string formatting; regular expressions (`Pattern`, `Matcher`) (see `ROADMAP.md`).
+**Next up:** Category 7 remainder — Regular expressions (`Pattern`, `Matcher`) (see `ROADMAP.md`). This completes Category 7.
