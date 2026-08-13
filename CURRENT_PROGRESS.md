@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 7 — Strings & Text Processing (in progress — 3 of 4 sub-items done) |
-| Current Concept | String immutability/StringBuilder/StringBuffer, common String methods, string formatting — complete; regular expressions (Pattern/Matcher) remaining |
-| Concepts Completed | 6 / 32 |
-| Sessions Completed | 9 |
+| Current Roadmap Category | 7 — Strings & Text Processing (complete) |
+| Current Concept | Category 7 complete (immutability/StringBuilder/StringBuffer, common String methods, formatting, regular expressions via Pattern/Matcher) |
+| Concepts Completed | 7 / 32 |
+| Sessions Completed | 10 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 10 — 2026-08-13
+- Phase: Daily Learning
+- Concept / Build Step: Category 7 — Strings & Text Processing, part 2 of 2 (regular expressions: `Pattern`/`Matcher`, syntax basics confirmed as already familiar, `Pattern.compile()` reuse, `matches()` vs `find()`, iterating multiple matches, capturing groups/`group(n)`). Completes Category 7.
+- Problems given: (simple) validate a fixed product-code format (`AA-1234-XYZ` shape) against 6 test strings (1 valid, 5 invalid) using a single compiled `Pattern` and `Matcher.matches()` / (hard) extract structured fields (timestamp, level, user, code, message) from 6 valid log-style entries embedded in an 8-line block (2 deliberate non-log noise lines), using one compiled `Pattern` with `Pattern.MULTILINE` and a `Matcher.find()` loop, then reporting total valid entries, per-level counts, per-user ERROR counts, and the most frequent code — via `Map`s from Category 6.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. Problem 1 matched all 6 expected booleans exactly. Problem 2 correctly isolated all 6 real log lines from the 2 noise lines purely via regex failure-to-match (no pre-filtering with `split`/`contains`), and all four report sections (total 6; ERROR 3/INFO 2/WARN 1; alice/bob/carol each 1 ERROR; E502 most frequent at 2) were hand-verified against the source block. `MULTILINE` was correctly applied so `^`/`$` anchored per-line rather than to the whole block. One non-blocking note: the pattern defined 5 capturing groups but only 3 (level/user/code) were ever read via `group(n)` — timestamp and message were extracted only in a dead comment, never called — not a correctness issue since the report didn't need those fields, but flagged as a case where `(?:...)` non-capturing groups would have more precisely signaled intent for the two unused pieces.
+- Struggles / notes: None.
+- Next session should cover: Category 8 — Exception Handling (`try`/`catch`/`finally`, checked vs. unchecked exceptions, custom exceptions, try-with-resources).
 
 ### Session 9 — 2026-08-11
 - Phase: Daily Learning
@@ -142,7 +151,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 4 | OOP — Core | ✅ | 2026-08-01 |
 | 5 | OOP — Advanced | ✅ | 2026-08-01 |
 | 6 | Arrays & Core Collections | ✅ | 2026-08-06 |
-| 7 | Strings & Text Processing | 🟡 | |
+| 7 | Strings & Text Processing | ✅ | 2026-08-13 |
 | 8 | Exception Handling | ⬜ | |
 | 9 | Generics | ⬜ | |
 | 10 | Java 8+ Functional Features | ⬜ | |
@@ -189,4 +198,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 7 remainder — Regular expressions (`Pattern`, `Matcher`) (see `ROADMAP.md`). This completes Category 7.
+**Next up:** Category 8 — Exception Handling (`try`/`catch`/`finally`, checked vs. unchecked exceptions, custom exceptions, try-with-resources) (see `ROADMAP.md`).

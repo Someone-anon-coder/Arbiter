@@ -48,11 +48,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Iterating collections, `Iterator`
 - [x] Choosing the right collection for a problem
 
-## 7. Strings & Text Processing ⬜
+## 7. Strings & Text Processing ✅
 - [x] String immutability, `String` vs `StringBuilder` vs `StringBuffer`
 - [x] Common `String` methods
 - [x] String formatting
-- [ ] Regular expressions (`Pattern`, `Matcher`)
+- [x] Regular expressions (`Pattern`, `Matcher`)
 
 ## 8. Exception Handling ⬜
 - [ ] `try`, `catch`, `finally`
