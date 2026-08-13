@@ -54,11 +54,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] String formatting
 - [x] Regular expressions (`Pattern`, `Matcher`)
 
-## 8. Exception Handling ⬜
-- [ ] `try`, `catch`, `finally`
-- [ ] Checked vs. unchecked exceptions
-- [ ] Custom exceptions
-- [ ] Try-with-resources
+## 8. Exception Handling ✅
+- [x] `try`, `catch`, `finally`
+- [x] Checked vs. unchecked exceptions
+- [x] Custom exceptions
+- [x] Try-with-resources
 
 ## 9. Generics ⬜
 - [ ] Generic classes and methods
