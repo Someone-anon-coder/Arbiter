@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 7 — Strings & Text Processing (complete) |
-| Current Concept | Category 7 complete (immutability/StringBuilder/StringBuffer, common String methods, formatting, regular expressions via Pattern/Matcher) |
-| Concepts Completed | 7 / 32 |
-| Sessions Completed | 10 |
+| Current Roadmap Category | 8 — Exception Handling (complete) |
+| Current Concept | Category 8 complete (try/catch/finally execution order, checked vs. unchecked exceptions, custom exceptions, try-with-resources) |
+| Concepts Completed | 8 / 32 |
+| Sessions Completed | 11 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 11 — 2026-08-13
+- Phase: Daily Learning
+- Concept / Build Step: Category 8 — Exception Handling (`try`/`catch`/`finally` execution order including the `finally`-always-runs guarantee; checked vs. unchecked exceptions and the compile-time catch-or-declare enforcement; custom exceptions extending `Exception` vs. `RuntimeException`; try-with-resources, `AutoCloseable`, and reverse-declaration-order closing). Completes Category 8.
+- Problems given: (simple) custom checked `NegativeAmountException` thrown from a `withdraw` method, caught by the caller across two separate `try`/`catch`/`finally` calls (one valid, one negative), each `finally` proving it runs regardless of outcome / (hard) custom `TrackedResource implements AutoCloseable` used two-at-a-time in three separate try-with-resources blocks, with a `process(code)` method throwing a custom checked `DataFormatException` or custom unchecked `DataCorruptionException` depending on code, each handled with its own separately-typed `catch` (no catch-all), requiring correct reverse close order to be visible in output both on the success path and before each catch block ran.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. Problem 1's `finally` block printed after both the successful call and the caught-exception call, proving the always-runs guarantee rather than just asserting it. Problem 2's output sequence (`Closing R2` → `Closing R1` → then the catch block's print) was hand-verified across all three blocks, confirming resources close in reverse declaration order and that closing happens before control reaches any `catch` — true on the no-exception path and both exception paths alike. The checked (`DataFormatException`) and unchecked (`DataCorruptionException`) cases were caught with separate typed `catch` blocks, not a shared catch-all. One minor non-blocking note: the no-exception block (`process(0)`) still carried both `catch` clauses even though neither is reachable there — harmless, not worth resubmitting for.
+- Struggles / notes: None.
+- Next session should cover: Category 9 — Generics (generic classes and methods, bounded type parameters, wildcards `? extends`/`? super`).
 
 ### Session 10 — 2026-08-13
 - Phase: Daily Learning
@@ -152,7 +161,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 5 | OOP — Advanced | ✅ | 2026-08-01 |
 | 6 | Arrays & Core Collections | ✅ | 2026-08-06 |
 | 7 | Strings & Text Processing | ✅ | 2026-08-13 |
-| 8 | Exception Handling | ⬜ | |
+| 8 | Exception Handling | ✅ | 2026-08-13 |
 | 9 | Generics | ⬜ | |
 | 10 | Java 8+ Functional Features | ⬜ | |
 | 11 | Multithreading & Concurrency | ⬜ | |
@@ -198,4 +207,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 8 — Exception Handling (`try`/`catch`/`finally`, checked vs. unchecked exceptions, custom exceptions, try-with-resources) (see `ROADMAP.md`).
+**Next up:** Category 9 — Generics (generic classes and methods, bounded type parameters, wildcards `? extends`/`? super`) (see `ROADMAP.md`).
