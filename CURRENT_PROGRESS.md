@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 8 — Exception Handling (complete) |
-| Current Concept | Category 8 complete (try/catch/finally execution order, checked vs. unchecked exceptions, custom exceptions, try-with-resources) |
-| Concepts Completed | 8 / 32 |
-| Sessions Completed | 11 |
+| Current Roadmap Category | 9 — Generics (complete) |
+| Current Concept | Category 9 complete (generic classes/methods, bounded type parameters, wildcards `? extends`/`? super` and PECS) |
+| Concepts Completed | 9 / 32 |
+| Sessions Completed | 12 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 12 — 2026-08-16
+- Phase: Daily Learning
+- Concept / Build Step: Category 9 — Generics (generic classes/methods and why they exist over raw `Object`-based pre-generics code; bounded type parameters `<T extends SomeClass>` and what a bound unlocks; wildcards `? extends`/`? super` and the PECS principle). Completes Category 9.
+- Problems given: (simple) `ScoreBox<T extends Comparable<T>>` with an `isHigherThan` method calling `compareTo` on the bound, demonstrated with `Integer` and `String`, plus a comment identifying which line would fail to compile without the bound / (hard) two separate generic static methods over `List` — `sumNumbers(List<? extends Number>)` (read-only, summing via `doubleValue()`) and `fillWithZero(List<? super Integer>, int)` (write-only, appending `Integer.valueOf(0)`) — each required to compile against three specific call sites (`List<Integer>`/`List<Double>`/`List<Number>` for the first; `List<Number>`/`List<Object>`/`List<Integer>` for the second) that only work with the correct wildcard direction.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running — all ten output lines matched expected values exactly. Went beyond "it compiled" for the hard problem: independently compiled the unbounded `ScoreBox<T>` variant and confirmed `value.compareTo(other)` genuinely fails without the bound (`cannot find symbol: method compareTo(T)`); independently compiled `sumNumbers` with `? super Number` and confirmed both `List<Integer>` and `List<Double>` calls genuinely fail (`incompatible types`); independently compiled `fillWithZero` with `? extends Integer` and confirmed both the `list.add(...)` line itself and the `List<Number>`/`List<Object>` call sites genuinely fail to compile. All three wildcard/bound claims in the submitted comments were real compiler behavior, not asserted reasoning that happened to sound right. No manufactured improvements — one purely cosmetic note (an `if/else` returning literal booleans in `isHigherThan` could collapse to a single `return` expression) flagged as non-blocking.
+- Struggles / notes: None.
+- Next session should cover: Category 10 — Java 8+ Functional Features (lambda expressions; functional interfaces `Function`/`Predicate`/`Consumer`/`Supplier`; Streams API map/filter/reduce/collect; method references; `Optional`).
 
 ### Session 11 — 2026-08-13
 - Phase: Daily Learning
@@ -162,7 +171,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 6 | Arrays & Core Collections | ✅ | 2026-08-06 |
 | 7 | Strings & Text Processing | ✅ | 2026-08-13 |
 | 8 | Exception Handling | ✅ | 2026-08-13 |
-| 9 | Generics | ⬜ | |
+| 9 | Generics | ✅ | 2026-08-16 |
 | 10 | Java 8+ Functional Features | ⬜ | |
 | 11 | Multithreading & Concurrency | ⬜ | |
 | 12 | File I/O & NIO | ⬜ | |
@@ -207,4 +216,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 9 — Generics (generic classes and methods, bounded type parameters, wildcards `? extends`/`? super`) (see `ROADMAP.md`).
+**Next up:** Category 10 — Java 8+ Functional Features (lambda expressions; functional interfaces `Function`/`Predicate`/`Consumer`/`Supplier`; Streams API map/filter/reduce/collect; method references; `Optional`) (see `ROADMAP.md`).
