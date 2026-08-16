@@ -60,10 +60,10 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Custom exceptions
 - [x] Try-with-resources
 
-## 9. Generics ⬜
-- [ ] Generic classes and methods
-- [ ] Bounded type parameters
-- [ ] Wildcards (`? extends`, `? super`)
+## 9. Generics ✅
+- [x] Generic classes and methods
+- [x] Bounded type parameters
+- [x] Wildcards (`? extends`, `? super`)
 
 ## 10. Java 8+ Functional Features ⬜
 - [ ] Lambda expressions
