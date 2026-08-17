@@ -66,10 +66,10 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Wildcards (`? extends`, `? super`)
 
 ## 10. Java 8+ Functional Features ⬜
-- [ ] Lambda expressions
-- [ ] Functional interfaces (`Function`, `Predicate`, `Consumer`, `Supplier`)
+- [x] Lambda expressions
+- [x] Functional interfaces (`Function`, `Predicate`, `Consumer`, `Supplier`)
 - [ ] Streams API (map, filter, reduce, collect)
-- [ ] Method references
+- [x] Method references
 - [ ] `Optional`
 
 ## 11. Multithreading & Concurrency ⬜
