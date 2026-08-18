@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 9 — Generics (complete) |
-| Current Concept | Category 9 complete (generic classes/methods, bounded type parameters, wildcards `? extends`/`? super` and PECS) |
-| Concepts Completed | 9 / 32 |
-| Sessions Completed | 12 |
+| Current Roadmap Category | 10 — Java 8+ Functional Features (in progress: lambdas/functional interfaces/method references done, Streams API/`Optional` pending) |
+| Current Concept | Category 10 sub-items — lambda expressions, functional interfaces (`Function`/`Predicate`/`Consumer`/`Supplier` + composition), method references (all four forms) |
+| Concepts Completed | 9 / 32 (Category 10 in progress, not yet checked off) |
+| Sessions Completed | 13 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 13 — 2026-08-17
+- Phase: Daily Learning
+- Concept / Build Step: Category 10 — Java 8+ Functional Features, first three sub-items only (lambda expressions; functional interfaces incl. the "exactly one abstract method" rule, `@FunctionalInterface`, and the four core built-ins `Function`/`Predicate`/`Consumer`/`Supplier` with `andThen`/`compose`/`and`/`or`/`negate` composition; method references, all four forms). Streams API and `Optional` deliberately deferred to a follow-up session — Category 10 heading NOT checked off.
+- Problems given: (simple) `Predicate<String>` lambda (`length() >= 5`) applied in a plain `for` loop over a username array / (hard) employee report generator requiring a custom functional interface (`EmployeeFormatter`, with a checked `FormatException` on its abstract method — something none of the four built-ins can express), at least two method reference forms, and composition of both a `Predicate` chain and a `Function` chain, all via plain loops
+- Outcome: Correct
+- Evaluation summary: Both correct on first submission, verified by compiling and running (output hand-traced and matched exactly). The custom functional interface was genuinely necessary rather than decorative — its abstract method declares a checked exception, which none of `Function`/`Predicate`/`Consumer`/`Supplier` permit, so a custom interface was the only way to model that. Two distinct method reference forms were used and correctly labeled in comments (static: `Employee::isSalaryAboveThreshold`; arbitrary-object-instance: `Employee::isNameNonBlank`, `String::trim`, `String::toUpperCase`). Composition was load-bearing, not cosmetic: `salaryCheck.and(nameCheck)` actually drove the "Bonus Eligible" filter, `normalize.andThen(String::toUpperCase)` actually produced the formatted names. Additionally verified the exception/fallback path (`formatOrDefault`) by manually testing a null-name record — confirmed it correctly falls through to `INVALID_RECORD` in "All Records" while being excluded from "Bonus Eligible" via `isNameNonBlank()`, without throwing.
+- Struggles / notes: None.
+- Next session should cover: Category 10 remainder — Streams API (`map`/`filter`/`reduce`/`collect`) and `Optional`, which build directly on this session's lambda/functional-interface/method-reference foundation. Only then does Category 10 get checked off as complete.
 
 ### Session 12 — 2026-08-16
 - Phase: Daily Learning
@@ -172,7 +181,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 7 | Strings & Text Processing | ✅ | 2026-08-13 |
 | 8 | Exception Handling | ✅ | 2026-08-13 |
 | 9 | Generics | ✅ | 2026-08-16 |
-| 10 | Java 8+ Functional Features | ⬜ | |
+| 10 | Java 8+ Functional Features | 🟡 | |
 | 11 | Multithreading & Concurrency | ⬜ | |
 | 12 | File I/O & NIO | ⬜ | |
 | 13 | Data Structures & Algorithms | ⬜ | |
@@ -216,4 +225,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 10 — Java 8+ Functional Features (lambda expressions; functional interfaces `Function`/`Predicate`/`Consumer`/`Supplier`; Streams API map/filter/reduce/collect; method references; `Optional`) (see `ROADMAP.md`).
+**Next up:** Category 10 remainder — Streams API (`map`/`filter`/`reduce`/`collect`) and `Optional` (see `ROADMAP.md`). Lambdas, functional interfaces, and method references are done (Session 13); Category 10 is checked off only once these two remaining sub-items are complete.
