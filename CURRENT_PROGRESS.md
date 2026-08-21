@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 10 — Java 8+ Functional Features (in progress: lambdas/functional interfaces/method references done, Streams API/`Optional` pending) |
-| Current Concept | Category 10 sub-items — lambda expressions, functional interfaces (`Function`/`Predicate`/`Consumer`/`Supplier` + composition), method references (all four forms) |
-| Concepts Completed | 9 / 32 (Category 10 in progress, not yet checked off) |
-| Sessions Completed | 13 |
+| Current Roadmap Category | 10 — Java 8+ Functional Features (complete) |
+| Current Concept | Category 10 sub-items — Streams API (map/filter/sorted/reduce/collect, `Collectors.groupingBy`), stream laziness, `Optional` (`orElse`/`orElseGet`/`orElseThrow`, `map`/`filter`) |
+| Concepts Completed | 10 / 32 |
+| Sessions Completed | 14 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 14 — 2026-08-21
+- Phase: Daily Learning
+- Concept / Build Step: Category 10 remainder — Streams API (creating a stream, intermediate/terminal distinction, `map`/`filter`/`sorted`, terminal `reduce` and `collect` incl. `Collectors.toList`/`toMap`/`joining`/`groupingBy`), stream laziness (a pipeline with no terminal operation does nothing), and `Optional` (`orElse` vs. lazy `orElseGet(Supplier)` vs. `orElseThrow`, `map`/`filter` on an `Optional`, and why `isPresent()`+`get()` defeats the purpose). Completes Category 10.
+- Problems given: (simple) single stream pipeline over a fixed word list — `filter` (length > 3) → `map(String::toUpperCase)` → `collect(Collectors.joining(", "))`, plus a separate `reduce` over the unfiltered list summing character counts / (hard) `Collectors.groupingBy(Transaction::customer)` over a fixed transaction list, then a `totalFor` lookup method required to use `Optional.ofNullable(map.get(...))` → `.map(...)` → `.orElseGet(...)` (not `isPresent()`+`get()`, not a plain null-check) called for two present customers and one absent customer (proving the `orElseGet` `Supplier`'s side-effect print fires only for the absent one), plus a second `groupingBy` with a downstream `Collectors.summingDouble` to produce per-category totals directly.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. Problem 1's filtered/uppercased output (`APPLE, KIWI, BANANA, CHERRY, DATE`) and character total (28) were both right for the stated "length > 3" filter — the session prompt's own stated "expected output" undercounted (listed only 3 words and a wrong total of 27); this was an authoring error in the prompt, not a fault in the submission, and is corrected here for the record. Problem 2 was fully correct: `Optional.ofNullable(...).map(...).orElseGet(...)` used idiomatically throughout, with `orElseGet`'s `Supplier` proven genuinely lazy by the "No transactions found for Dave" message printing exactly once and only for Dave (Alice 207.70, Bob 322.29, Dave 0.00 all matched by hand). The second `groupingBy` correctly used a downstream `Collectors.summingDouble` collector to get `Map<String, Double>` category totals (Groceries 140.00, Electronics 449.99) directly, rather than grouping into lists and summing separately. No manufactured improvements — the Optional and Streams usage throughout was idiomatic, not checkbox-driven.
+- Struggles / notes: None on the author's part. Note for the Curriculum Architect below re: the prompt-authoring arithmetic error.
+- Next session should cover: Category 11 — Multithreading & Concurrency (per `ROADMAP.md`).
 
 ### Session 13 — 2026-08-17
 - Phase: Daily Learning
@@ -181,7 +190,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 7 | Strings & Text Processing | ✅ | 2026-08-13 |
 | 8 | Exception Handling | ✅ | 2026-08-13 |
 | 9 | Generics | ✅ | 2026-08-16 |
-| 10 | Java 8+ Functional Features | 🟡 | |
+| 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
 | 11 | Multithreading & Concurrency | ⬜ | |
 | 12 | File I/O & NIO | ⬜ | |
 | 13 | Data Structures & Algorithms | ⬜ | |
@@ -225,4 +234,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 10 remainder — Streams API (`map`/`filter`/`reduce`/`collect`) and `Optional` (see `ROADMAP.md`). Lambdas, functional interfaces, and method references are done (Session 13); Category 10 is checked off only once these two remaining sub-items are complete.
+**Next up:** Category 11 — Multithreading & Concurrency (see `ROADMAP.md`). Category 10 (Java 8+ Functional Features) is fully complete as of Session 14.
