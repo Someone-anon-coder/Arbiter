@@ -65,12 +65,12 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Bounded type parameters
 - [x] Wildcards (`? extends`, `? super`)
 
-## 10. Java 8+ Functional Features ⬜
+## 10. Java 8+ Functional Features ✅
 - [x] Lambda expressions
 - [x] Functional interfaces (`Function`, `Predicate`, `Consumer`, `Supplier`)
-- [ ] Streams API (map, filter, reduce, collect)
+- [x] Streams API (map, filter, reduce, collect)
 - [x] Method references
-- [ ] `Optional`
+- [x] `Optional`
 
 ## 11. Multithreading & Concurrency ⬜
 - [ ] `Thread` and `Runnable`
