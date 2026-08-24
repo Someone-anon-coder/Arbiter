@@ -73,11 +73,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] `Optional`
 
 ## 11. Multithreading & Concurrency ⬜
-- [ ] `Thread` and `Runnable`
-- [ ] `synchronized`, locks
+- [x] `Thread` and `Runnable`
+- [x] `synchronized`, locks
 - [ ] `ExecutorService` and thread pools
 - [ ] `CompletableFuture`
-- [ ] Common concurrency pitfalls (race conditions, deadlocks)
+- [x] Common concurrency pitfalls (race conditions, deadlocks)
 
 ## 12. File I/O & NIO ⬜
 - [ ] Reading/writing files (classic I/O)
