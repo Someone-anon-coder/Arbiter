@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 10 — Java 8+ Functional Features (complete) |
-| Current Concept | Category 10 sub-items — Streams API (map/filter/sorted/reduce/collect, `Collectors.groupingBy`), stream laziness, `Optional` (`orElse`/`orElseGet`/`orElseThrow`, `map`/`filter`) |
+| Current Roadmap Category | 11 — Multithreading & Concurrency (in progress) |
+| Current Concept | Category 11 sub-items covered so far — `Thread`/`Runnable` (incl. `start()` vs. `run()`), `join()`, `synchronized` (method- and block-level, intrinsic lock), `Lock`/`ReentrantLock`, race conditions (non-atomic `counter++`), deadlocks (circular wait, consistent lock ordering fix). `ExecutorService`/thread pools and `CompletableFuture` remain for a follow-up session before Category 11 is complete. |
 | Concepts Completed | 10 / 32 |
-| Sessions Completed | 14 |
+| Sessions Completed | 15 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 15 — 2026-08-24
+- Phase: Daily Learning
+- Concept / Build Step: Category 11 (first 3 of 5 sub-items) — `Thread`/`Runnable` (incl. the `start()` vs. `run()` distinction and `join()`), `synchronized`/`Lock` (`ReentrantLock`), and race conditions/deadlocks. Category 11 remains open — `ExecutorService`/thread pools and `CompletableFuture` are deferred to a follow-up session.
+- Problems given: (simple) 4 independent `Runnable` tasks (no shared state) started via `start()`, joined via `join()` before a final summary line prints / (hard, two parts) (a) shared unsynchronized `counter++` across 4 threads × 100,000 increments each, demonstrated wrong across 5+ runs, then fixed with `synchronized` and demonstrated exactly correct across 5+ runs; (b) two threads acquiring two shared locks in opposite order to reproduce a deadlock, detected via bounded `join(2000)` + `isAlive()` (no indefinite hang), then fixed via consistent lock ordering and shown to complete well within the timeout.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission. Verified by compiling and running the full program 4 independent times (not once) specifically because of the non-determinism involved: across all 4 runs (20 total inner trials), the unsynchronized counter was wrong on most 5-run batches every time (e.g. 108977–285087 vs. expected 400000), the synchronized counter was exactly 400000 on all 20 trials with zero exceptions, the buggy deadlock scenario reproduced (`isAlive() == true` on both threads after the 2000ms timeout) in all 4 runs, and the fixed version completed in ~102ms with `isAlive() == false` on both threads in all 4 runs. `start()`/`join()` ordering in the simple problem was correct (all 4 `.start()` before any `.join()`), confirmed by genuinely interleaved thread output in the trace. One minor named gap, not a functional bug: the simple problem's final summary line only surfaces `Print1To10`'s result — the other 3 tasks don't accumulate/report an inspectable result of their own, so "Results: ..." effectively reflects only 1 of 4 tasks.
+- Struggles / notes: None.
+- Next session should cover: Category 11 remainder — `ExecutorService`/thread pools and `CompletableFuture` (per `ROADMAP.md`), to close out Category 11.
 
 ### Session 14 — 2026-08-21
 - Phase: Daily Learning
@@ -191,7 +200,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 8 | Exception Handling | ✅ | 2026-08-13 |
 | 9 | Generics | ✅ | 2026-08-16 |
 | 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
-| 11 | Multithreading & Concurrency | ⬜ | |
+| 11 | Multithreading & Concurrency | 🟡 | |
 | 12 | File I/O & NIO | ⬜ | |
 | 13 | Data Structures & Algorithms | ⬜ | |
 | 14 | Build Tools & Project Structure | ⬜ | |
@@ -234,4 +243,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 11 — Multithreading & Concurrency (see `ROADMAP.md`). Category 10 (Java 8+ Functional Features) is fully complete as of Session 14.
+**Next up:** Category 11 remainder — `ExecutorService`/thread pools and `CompletableFuture` (see `ROADMAP.md`). `Thread`/`Runnable`, `synchronized`/locks, and race conditions/deadlocks are complete as of Session 15; Category 11 itself stays open until the remaining two sub-items are covered.
