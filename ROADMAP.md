@@ -72,11 +72,11 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Method references
 - [x] `Optional`
 
-## 11. Multithreading & Concurrency ⬜
+## 11. Multithreading & Concurrency ✅
 - [x] `Thread` and `Runnable`
 - [x] `synchronized`, locks
-- [ ] `ExecutorService` and thread pools
-- [ ] `CompletableFuture`
+- [x] `ExecutorService` and thread pools
+- [x] `CompletableFuture`
 - [x] Common concurrency pitfalls (race conditions, deadlocks)
 
 ## 12. File I/O & NIO ⬜
