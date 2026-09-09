@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 11 — Multithreading & Concurrency (in progress) |
-| Current Concept | Category 11 sub-items covered so far — `Thread`/`Runnable` (incl. `start()` vs. `run()`), `join()`, `synchronized` (method- and block-level, intrinsic lock), `Lock`/`ReentrantLock`, race conditions (non-atomic `counter++`), deadlocks (circular wait, consistent lock ordering fix). `ExecutorService`/thread pools and `CompletableFuture` remain for a follow-up session before Category 11 is complete. |
-| Concepts Completed | 10 / 32 |
-| Sessions Completed | 15 |
+| Current Roadmap Category | 12 — File I/O & NIO (not started) |
+| Current Concept | Category 11 (Multithreading & Concurrency) is complete — `Thread`/`Runnable`, `synchronized`/`Lock`, race conditions/deadlocks, `ExecutorService`/thread pools, and `CompletableFuture` all covered. |
+| Concepts Completed | 11 / 32 |
+| Sessions Completed | 16 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 16 — 2026-09-09
+- Phase: Daily Learning
+- Concept / Build Step: Category 11 remainder (final 2 of 5 sub-items) — `ExecutorService`/thread pools (`newFixedThreadPool`, `submit()` vs. `execute()`, `Future.get()`/`isDone()`, `shutdown()`/`shutdownNow()`/bounded `awaitTermination`) and `CompletableFuture` (`supplyAsync`, `thenApply` vs. `thenCompose`, `thenCombine`, `exceptionally()` vs. `handle()`). Completes Category 11.
+- Problems given: (simple) 5 independent `Callable<Integer>` tasks submitted to a fixed 3-thread `ExecutorService`, results collected via `Future.get()`, executor shut down via `shutdown()` + bounded `awaitTermination` with a `shutdownNow()` fallback, then a summary printed / (hard) a `CompletableFuture` order-pricing pipeline for 3 order IDs — base price lookup, `thenCompose`'d discount stage (`applyDiscount` returns its own `CompletableFuture`, genuinely requiring `thenCompose` over `thenApply`), an independent shipping-fee `CompletableFuture` merged in via `thenCombine`, a deliberate failure in the shipping stage for `ORDER-3`, and `handle()` (not `exceptionally()`) recovering a specified fallback total of `50.0` for the failing case while passing the other two orders' results through unchanged.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running. Problem 1: sum of squares (55) matched hand-calculation, `InterruptedException`/`ExecutionException` from `get()` both handled correctly (including thread re-interruption), and the process exited on its own in ~0.3s, proving the pool's threads didn't leak past shutdown. One non-blocking note: `awaitTermination` is called after the `get()` loop already blocked until every task finished, so it always returns immediately — correct and bounded as required, just not doing meaningful waiting in this particular arrangement (it earns its keep more when tasks aren't individually `get()`'d). Problem 2: `thenCompose` was genuinely necessary and correctly used — `applyDiscount` really does return `CompletableFuture<Double>`, avoiding the `CompletableFuture<CompletableFuture<Double>>` nesting `thenApply` would have produced. The shipping-fee future was truly independent (its own `supplyAsync`, not derived from prior stages) and correctly merged via `thenCombine`. `handle()` was used correctly and was the right tool for the job — it inspected both the result and exception in one callback, recovered exactly `50.0` for `ORDER-3`'s deliberate failure, and passed the other two orders through unchanged; `finalFuture.get()` for `ORDER-3` returned `50.0` without throwing, proving genuine recovery rather than exception suppression.
+- Struggles / notes: None.
+- Next session should cover: Category 12 — File I/O & NIO, per `ROADMAP.md`.
 
 ### Session 15 — 2026-08-24
 - Phase: Daily Learning
@@ -200,7 +209,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 8 | Exception Handling | ✅ | 2026-08-13 |
 | 9 | Generics | ✅ | 2026-08-16 |
 | 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
-| 11 | Multithreading & Concurrency | 🟡 | |
+| 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
 | 12 | File I/O & NIO | ⬜ | |
 | 13 | Data Structures & Algorithms | ⬜ | |
 | 14 | Build Tools & Project Structure | ⬜ | |
@@ -243,4 +252,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 11 remainder — `ExecutorService`/thread pools and `CompletableFuture` (see `ROADMAP.md`). `Thread`/`Runnable`, `synchronized`/locks, and race conditions/deadlocks are complete as of Session 15; Category 11 itself stays open until the remaining two sub-items are covered.
+**Next up:** Category 12 — File I/O & NIO (see `ROADMAP.md`). Category 11 (Multithreading & Concurrency) is fully complete as of Session 16.
