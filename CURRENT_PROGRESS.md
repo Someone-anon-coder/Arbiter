@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 12 — File I/O & NIO (not started) |
-| Current Concept | Category 11 (Multithreading & Concurrency) is complete — `Thread`/`Runnable`, `synchronized`/`Lock`, race conditions/deadlocks, `ExecutorService`/thread pools, and `CompletableFuture` all covered. |
-| Concepts Completed | 11 / 32 |
-| Sessions Completed | 16 |
+| Current Roadmap Category | 12 — File I/O & NIO (classic I/O + NIO done; CSV done; JSON deferred pending Maven/Category 14 — heading stays open) |
+| Current Concept | Classic I/O (`FileReader`/`FileWriter` + `BufferedReader`/`BufferedWriter`, try-with-resources) and NIO (`Path`/`Files`) covered, plus hand-rolled CSV read/write with correct quoting/escaping. JSON explicitly deferred until a real library (e.g. Jackson) is available post-Maven (Category 14). |
+| Concepts Completed | 11 / 32 (Category 12 remains open pending the JSON sub-item) |
+| Sessions Completed | 17 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 17 — 2026-09-09
+- Phase: Daily Learning
+- Concept / Build Step: Category 12, first two of three sub-items — classic I/O (`FileReader`/`FileWriter` wrapped in `BufferedReader`/`BufferedWriter`, try-with-resources) and NIO (`java.nio.file.Path`/`Files`: `exists`, `createDirectories`, `readAllLines`, `writeString`), plus hand-rolled CSV reading/writing with correct quoting/escaping (comma- and quote-containing fields). JSON explicitly deferred pending Maven (Category 14) — Category 12 heading stays unchecked as a result.
+- Problems given: (simple) classic I/O round-trip — write 5 fixed lines to `Files/greeting.txt` via `BufferedWriter` (try-with-resources), read them back in a separate try-with-resources `BufferedReader` block, print each with a line-number prefix, confirm read count matches write count / (hard) NIO-based directory creation (`Files/csv_reports/`) plus a hand-rolled CSV writer/parser over 5 `Employee` records — one with a comma in the name field (`Bob Smith, Jr.` and `Eve, Product`), one with an embedded quote (`Carol "CJ" White`) — requiring correct write-side quoting/doubling and a genuinely quote-aware character-scanning read-side parser (no `split(",")`), then a department-grouped salary report and an explicit print of the name field(s) containing a comma to prove they were captured whole.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling, running, and additionally inspecting the actual files written to disk (`Files/greeting.txt` and `Files/csv_reports/employees.csv`). Problem 1 used two genuinely separate try-with-resources blocks (write, then a fresh read from disk) rather than reusing an in-memory list, so the round-trip actually proved something; read/write counts matched at 5. Problem 2 used real NIO (`Files.exists`/`createDirectories`/`writeString`/`readAllLines`) throughout, not classic I/O. Inspecting the raw CSV file on disk confirmed correct output-side quoting (`"Bob Smith, Jr.",Sales,62000.0` and `"Carol ""CJ"" White",Marketing,71000.0` — comma preserved inside quotes, embedded quote doubled). The parser was a genuine character-by-character quote-tracking scan (not `split(",")` anywhere), and the report proved it worked: total employee count was exactly 5 (a `split(",")`-based parser would have produced 6 by splitting the comma-containing row into an extra field-group), department totals matched hand-calculation, and both comma-containing names (`Bob Smith, Jr.`, `Eve, Product`) printed whole rather than truncated at the interior comma. No manufactured improvements — one purely cosmetic, non-blocking note: the department report's iteration order comes from `Collectors.groupingBy`'s underlying `HashMap`, which isn't guaranteed to be insertion or alphabetical order (harmless here since the problem didn't specify an order).
+- Struggles / notes: None.
+- Next session should cover: Category 13 — Data Structures & Algorithms (per `ROADMAP.md`). JSON (Category 12's third sub-item) remains explicitly deferred until Maven/dependency management is covered in Category 14, at which point a real library (e.g. Jackson) should be used rather than hand-rolled parsing.
 
 ### Session 16 — 2026-09-09
 - Phase: Daily Learning
@@ -210,7 +219,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 9 | Generics | ✅ | 2026-08-16 |
 | 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
 | 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
-| 12 | File I/O & NIO | ⬜ | |
+| 12 | File I/O & NIO | 🟡 | (classic I/O + NIO + CSV done Session 17; JSON deferred pending Maven, Category 14) |
 | 13 | Data Structures & Algorithms | ⬜ | |
 | 14 | Build Tools & Project Structure | ⬜ | |
 | 15 | JDBC & Relational DB Basics | ⬜ | |
@@ -252,4 +261,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 12 — File I/O & NIO (see `ROADMAP.md`). Category 11 (Multithreading & Concurrency) is fully complete as of Session 16.
+**Next up:** Category 13 — Data Structures & Algorithms (see `ROADMAP.md`). Category 12 (File I/O & NIO) remains open — classic I/O, NIO, and CSV are done as of Session 17, but JSON is explicitly deferred until Maven/dependency management (Category 14) makes a real JSON library available.
