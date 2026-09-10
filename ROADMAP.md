@@ -85,8 +85,8 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [ ] Working with JSON/CSV in Java (CSV done — Session 17; JSON deferred pending Maven, Category 14)
 
 ## 13. Data Structures & Algorithms ⬜
-- [ ] Stacks, Queues
-- [ ] Linked Lists (custom implementation)
+- [x] Stacks, Queues
+- [x] Linked Lists (custom implementation)
 - [ ] Trees, Graphs (basics)
 - [ ] Sorting and searching algorithms
 - [ ] Big-O reasoning applied to the above

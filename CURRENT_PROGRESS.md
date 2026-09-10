@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 12 — File I/O & NIO (classic I/O + NIO done; CSV done; JSON deferred pending Maven/Category 14 — heading stays open) |
-| Current Concept | Classic I/O (`FileReader`/`FileWriter` + `BufferedReader`/`BufferedWriter`, try-with-resources) and NIO (`Path`/`Files`) covered, plus hand-rolled CSV read/write with correct quoting/escaping. JSON explicitly deferred until a real library (e.g. Jackson) is available post-Maven (Category 14). |
-| Concepts Completed | 11 / 32 (Category 12 remains open pending the JSON sub-item) |
-| Sessions Completed | 17 |
+| Current Roadmap Category | 13 — Data Structures & Algorithms (Stacks/Queues + custom Linked List done; Trees/Graphs and sorting/searching deferred to a follow-up session — heading stays open) |
+| Current Concept | Custom array-backed `Stack` (push/pop/peek, resizing), custom singly linked list with `head`+`tail` pointers, and a linked-list-backed `Queue` (enqueue/dequeue/peek) achieving O(1) on both ends. Big-O reasoning applied to each operation. Trees/Graphs and sorting/searching algorithms deferred to a follow-up session before Category 13 is checked off. |
+| Concepts Completed | 11 / 32 (Category 12 remains open pending the JSON sub-item; Category 13 remains open pending Trees/Graphs + sorting/searching) |
+| Sessions Completed | 18 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 18 — 2026-09-10
+- Phase: Daily Learning
+- Concept / Build Step: Category 13, first two of five sub-items — Stacks (array-backed, with resizing), Queues (custom singly linked list with `head`+`tail` pointers, avoiding the naive O(n)-enqueue trap), and Big-O reasoning applied to both. Custom linked list built directly (no `java.util.Stack`/`ArrayDeque`/`LinkedList` anywhere). Trees/Graphs and sorting/searching algorithms deferred to a follow-up session — Category 13 heading stays unchecked.
+- Problems given: (simple) array-backed `Stack<T>` from scratch used to validate balanced brackets (`()[]{}`) across 6 test strings covering matched, wrong-nesting-order, mismatched, unclosed, and closer-with-nothing-open cases / (hard) custom singly linked list with `head`+`tail` pointers, a `Queue<T>` built on top of it with O(1) enqueue/dequeue, used to simulate round-robin CPU scheduling (4 tasks, quantum 4) — repeatedly dequeue, run for up to one quantum, re-enqueue if unfinished — printing completion order and turnaround times, specifically designed so that an accidentally-O(n) enqueue (task D re-enqueued twice, task C once) would still produce correct output and only be catchable by reading the implementation.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling, running, and independently hand-tracing the round-robin schedule (completion order B, A, D, C at times 7, 18, 23, 24 — matched exactly). Problem 1 correctly rejected all three "false" cases for genuinely different reasons (wrong nesting order via the `matches()` check, mismatched pair, and unclosed via the final `stack.isEmpty()` check), not just coincidentally. Problem 2's `Queue.enqueue`/`dequeue` were read directly rather than trusted from output: `enqueue` calls `insertAtTail`, which uses the `tail` pointer directly with no walk, and `dequeue` uses `head` directly — genuine O(1)/O(1), the specific thing this problem was built to catch. `tail` is correctly nulled out in `removeHead` when the list empties, avoiding the classic dangling-tail corruption bug. No rework needed. Two minor, non-blocking notes: `Stack.resize()` is `public` when it's really an internal implementation detail (no functional impact); the completion-order report recovers ordering via a `time`-indexed scan over unique `completionTime` values rather than recording order directly at the moment each task completes (correct, just more roundabout than necessary).
+- Struggles / notes: None. 
+- Next session should cover: Category 13 remainder — Trees, Graphs (basics), sorting and searching algorithms, and Big-O reasoning applied to those, per `ROADMAP.md`. Category 13 heading stays unchecked in ROADMAP.md until that session completes it. Category 12 (File I/O & NIO) also remains open pending JSON post-Maven (Category 14) — unrelated to Category 13, unchanged this session.
 
 ### Session 17 — 2026-09-09
 - Phase: Daily Learning
@@ -220,7 +229,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
 | 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
 | 12 | File I/O & NIO | 🟡 | (classic I/O + NIO + CSV done Session 17; JSON deferred pending Maven, Category 14) |
-| 13 | Data Structures & Algorithms | ⬜ | |
+| 13 | Data Structures & Algorithms | 🟡 | (Stacks/Queues + custom Linked List done Session 18; Trees/Graphs and sorting/searching pending) |
 | 14 | Build Tools & Project Structure | ⬜ | |
 | 15 | JDBC & Relational DB Basics | ⬜ | |
 | 16 | Testing Fundamentals (JUnit 5) | ⬜ | |
@@ -261,4 +270,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 13 — Data Structures & Algorithms (see `ROADMAP.md`). Category 12 (File I/O & NIO) remains open — classic I/O, NIO, and CSV are done as of Session 17, but JSON is explicitly deferred until Maven/dependency management (Category 14) makes a real JSON library available.
+**Next up:** Category 13 remainder — Trees, Graphs (basics), sorting and searching algorithms, and Big-O reasoning applied to those (see `ROADMAP.md`). Stacks, Queues, and the custom Linked List are done as of Session 18. Category 12 (File I/O & NIO) also remains open — classic I/O, NIO, and CSV are done as of Session 17, but JSON is explicitly deferred until Maven/dependency management (Category 14) makes a real JSON library available.
