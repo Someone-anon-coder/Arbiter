@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 13 — Data Structures & Algorithms (Stacks/Queues + custom Linked List done; Trees/Graphs and sorting/searching deferred to a follow-up session — heading stays open) |
-| Current Concept | Custom array-backed `Stack` (push/pop/peek, resizing), custom singly linked list with `head`+`tail` pointers, and a linked-list-backed `Queue` (enqueue/dequeue/peek) achieving O(1) on both ends. Big-O reasoning applied to each operation. Trees/Graphs and sorting/searching algorithms deferred to a follow-up session before Category 13 is checked off. |
-| Concepts Completed | 11 / 32 (Category 12 remains open pending the JSON sub-item; Category 13 remains open pending Trees/Graphs + sorting/searching) |
-| Sessions Completed | 18 |
+| Current Roadmap Category | 13 — Data Structures & Algorithms — COMPLETE (Session 19). Next: Category 14 (Build Tools & Project Structure). Category 12 remains open pending JSON post-Maven. |
+| Current Concept | BST (insert/search/in-order, degenerate case), graph adjacency list + BFS, from-scratch merge sort, from-scratch binary search, Big-O applied to all. |
+| Concepts Completed | 12 / 32 (Category 12 remains open pending the JSON sub-item) |
+| Sessions Completed | 19 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 19 — 2026-10-09
+- Phase: Daily Learning
+- Concept / Build Step: Category 13 remainder (completes Category 13) — Binary Search Tree (insert/search/in-order, why in-order is sorted, degenerate sorted-insert case), graph adjacency list + BFS shortest fewest-edges distance, from-scratch merge sort, from-scratch binary search, Big-O reasoning for all.
+- Problems given: (simple) BST of ints from scratch, insert `50,30,70,20,40,60,80,35,65,30` (duplicate ignored), 6 search queries, in-order print, programmatic strictly-ascending check / (hard) 14-node undirected graph (custom adjacency list, one isolated node, one separate component, cycles and a shortcut edge) — BFS from `Hub` with unreachable nodes absent, from-scratch two-key (distance, then name) sort, and 8 distance queries (incl. unreachable and never-added `Ghost`) via from-scratch binary search over a second, name-sorted array built with the same sort routine.
+- Outcome: Correct
+- Evaluation summary: Both problems correct on first submission, verified by compiling and running; output matched my independent hand trace. Problem 1: in-order `20 30 35 40 50 60 65 70 80`, strictly ascending check genuinely implemented (adjacent comparison, no sort), duplicate 30 ignored, all 6 search results right. Problem 2: BFS is a true queue-based BFS with distance recorded on first discovery (not DFS); reachable count 10, with `Dune`/`Vex` (and `Ghost`) correctly absent rather than given a default distance. Merge sort is genuine divide-and-conquer (halve, recurse, linear merge, stable via `<=`) and a single comparator handles both keys; sorted output `Hub0 Alpha1 Mira1 Zed1 Bolt2 Echo2 Kilo2 Nova3 Quill3 Rook4` is correct. Binary search is a genuine iterative implementation with overflow-safe midpoint, returning `null` for absent names. All stated complexities (BST O(h) avg O(log n)/worst O(n), in-order O(n), BFS O(V+E), merge sort O(n log n), binary search O(log n)) were checked against the code and are correct; the written justification for why name-search on the (distance,name) array is invalid is correct. One minor non-blocking note: `ComparatorTwoKey` compares distances via subtraction, which is a classic overflow pattern (harmless for BFS distances; `Integer.compare` is the safe habit).
+- Struggles / notes: None. Author re-implemented a small `MyQueue` in the file rather than importing Session 18's (single-file submission convention) — O(1) enqueue/dequeue with correct tail-nulling retained.
+- Next session should cover: Category 14 — Build Tools & Project Structure (Maven fundamentals, multi-module structure, dependency management), per `ROADMAP.md`. Category 12 JSON sub-item can be picked up once Maven is covered.
 
 ### Session 18 — 2026-09-10
 - Phase: Daily Learning
@@ -229,7 +238,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
 | 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
 | 12 | File I/O & NIO | 🟡 | (classic I/O + NIO + CSV done Session 17; JSON deferred pending Maven, Category 14) |
-| 13 | Data Structures & Algorithms | 🟡 | (Stacks/Queues + custom Linked List done Session 18; Trees/Graphs and sorting/searching pending) |
+| 13 | Data Structures & Algorithms | ✅ | 2026-10-09 |
 | 14 | Build Tools & Project Structure | ⬜ | |
 | 15 | JDBC & Relational DB Basics | ⬜ | |
 | 16 | Testing Fundamentals (JUnit 5) | ⬜ | |
@@ -270,4 +279,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 13 remainder — Trees, Graphs (basics), sorting and searching algorithms, and Big-O reasoning applied to those (see `ROADMAP.md`). Stacks, Queues, and the custom Linked List are done as of Session 18. Category 12 (File I/O & NIO) also remains open — classic I/O, NIO, and CSV are done as of Session 17, but JSON is explicitly deferred until Maven/dependency management (Category 14) makes a real JSON library available.
+**Next up:** Category 14 — Build Tools & Project Structure (Maven fundamentals, multi-module structure, dependency management). Category 13 is complete as of Session 19. Category 12 (File I/O & NIO) remains open — JSON is deferred until Maven makes a real JSON library available.
