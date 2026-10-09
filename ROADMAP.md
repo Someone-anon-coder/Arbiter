@@ -84,12 +84,12 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] `java.nio.file` (Path, Files)
 - [ ] Working with JSON/CSV in Java (CSV done — Session 17; JSON deferred pending Maven, Category 14)
 
-## 13. Data Structures & Algorithms ⬜
+## 13. Data Structures & Algorithms ✅
 - [x] Stacks, Queues
 - [x] Linked Lists (custom implementation)
-- [ ] Trees, Graphs (basics)
-- [ ] Sorting and searching algorithms
-- [ ] Big-O reasoning applied to the above
+- [x] Trees, Graphs (basics)
+- [x] Sorting and searching algorithms
+- [x] Big-O reasoning applied to the above
 
 ## 14. Build Tools & Project Structure ⬜
 - [ ] Maven fundamentals (`pom.xml`, dependencies, lifecycle)
