@@ -92,7 +92,7 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Big-O reasoning applied to the above
 
 ## 14. Build Tools & Project Structure ⬜
-- [ ] Maven fundamentals (`pom.xml`, dependencies, lifecycle)
+- [x] Maven fundamentals (`pom.xml`, dependencies, lifecycle)
 - [ ] Multi-module project structure
 - [ ] Dependency management basics
 

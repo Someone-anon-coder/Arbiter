@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 13 — Data Structures & Algorithms — COMPLETE (Session 19). Next: Category 14 (Build Tools & Project Structure). Category 12 remains open pending JSON post-Maven. |
-| Current Concept | BST (insert/search/in-order, degenerate case), graph adjacency list + BFS, from-scratch merge sort, from-scratch binary search, Big-O applied to all. |
+| Current Roadmap Category | 14 — Build Tools & Project Structure — IN PROGRESS (Maven fundamentals done Session 20; multi-module + dependency management pending Session 21). Category 12 remains open pending JSON (Session 22). |
+| Current Concept | Maven fundamentals — standard layout, pom anatomy, lifecycle phases vs. plugin goals, dependency resolution and scopes, thin vs. fat jar (maven-shade-plugin). |
 | Concepts Completed | 12 / 32 (Category 12 remains open pending the JSON sub-item) |
-| Sessions Completed | 19 |
+| Sessions Completed | 20 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 20 — 2026-10-12
+- Phase: Daily Learning
+- Concept / Build Step: Category 14, first of three sub-items — Maven fundamentals: what Maven solves, standard directory layout, pom anatomy (coordinates, packaging, `maven.compiler.release`, `project.build.sourceEncoding`, dependencies, `<build>` plugins), default lifecycle and phase-vs-goal distinction, `clean` as a separate lifecycle, dependency resolution into `~/.m2` and scopes, thin jar vs. fat jar (shade) vs. copy-dependencies + manifest `Class-Path`. First session using the Maven-project-directory deliverable format (`java_20MavenBasics/problem1/`, `problem2/`, each with its own pom and `NOTES.md`). Environment: Apache Maven 3.8.7 on OpenJDK 21.0.12.1.
+- Problems given: (simple) hand-built Maven project `com.arbiter.learning:maven-basics-p1:1.0.0`, release 21, `Main` printing a fixed line; build with `mvn clean package`, run via `java -cp target/classes`, report `target/` contents, `jar tf`, and class-file major version / (hard) `maven-basics-p2` using Commons Lang3 `StringUtils` over 6 fixed inputs with exact expected output; (a) make `java -jar` work (shade or copy-deps + Class-Path, author's choice) from both the project dir and the repo root; (b) reproduce the thin-jar `NoClassDefFoundError` first; (c) `mvn dependency:tree`; (d) map every plugin-goal header from a real `mvn clean package` log to lifecycle/phase/binding source; (e) `test` scope → compile failure; (f) predict-then-verify `provided` scope.
+- Outcome: Correct with rework
+- Evaluation summary: All code and pom configuration correct on first submission, verified by clean builds and real runs: Problem 1 prints the required line, major version 65; Problem 2 (shade fat jar, Commons Lang3 3.14.0) prints exactly the 7 required lines from both the project dir and the repo root, the `original-` thin jar genuinely throws `NoClassDefFoundError: org/apache/commons/lang3/StringUtils`, `test` scope genuinely fails at `maven-compiler-plugin:3.13.0:compile` (5 errors, missing package/symbol), `provided` builds then fails at runtime. Pinning `maven-compiler-plugin` 3.13.0 was correctly identified as necessary (Maven 3.8.7 defaults to 3.1, which ignores `release`). However, the first NOTES.md contained evidence not taken from this machine's builds: part (d) listed clean 3.2.0 / resources 3.3.1 / surefire 3.2.5 (Maven 3.9.x defaults — never downloaded here; real log shows 2.5 / 2.6 / 2.12.4), part (f) quoted a shade "Excluding ..." line shade 3.6.0 does not print, and (b)/(e) line numbers didn't match the source. Second pass re-captured all of it from real output (one residual column typo in (e): `[18,36]` vs. real `[18,38]`), completed the `mvn compile` answer (clean lifecycle also skipped), and switched off shade's root-level `dependency-reduced-pom.xml` via `createDependencyReducedPom=false`. Plugin explanations (compiler pin, jar-plugin `mainClass` needed only for the thin-jar demo, shade needing an `<execution>` because it has no default binding, manifest-overlap warning) were all correct; one nuance corrected: the transformer keeps the project's own manifest and sets `Main-Class` on it rather than generating a fresh one (`Created-By: Maven JAR Plugin` survives).
+- Struggles / notes: Conceptual understanding solid throughout. The issue was evidence discipline — tool output was reconstructed rather than copied on the first pass. Worth keeping "paste real output" requirements explicit and verifying them in future tooling sessions. `.gitignore` now has `target/` (author-added).
+- Next session should cover: Category 14 remainder — multi-module project structure and dependency management basics (Session 21). Category 14 heading stays unchecked until then. Category 12 JSON sub-item planned for Session 22.
 
 ### Session 19 — 2026-10-09
 - Phase: Daily Learning
@@ -239,7 +248,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
 | 12 | File I/O & NIO | 🟡 | (classic I/O + NIO + CSV done Session 17; JSON deferred pending Maven, Category 14) |
 | 13 | Data Structures & Algorithms | ✅ | 2026-10-09 |
-| 14 | Build Tools & Project Structure | ⬜ | |
+| 14 | Build Tools & Project Structure | 🟡 | (Maven fundamentals done Session 20; multi-module + dependency management pending Session 21) |
 | 15 | JDBC & Relational DB Basics | ⬜ | |
 | 16 | Testing Fundamentals (JUnit 5) | ⬜ | |
 | 17 | Advanced Testing (Mockito, AssertJ, Testcontainers) | ⬜ | |
@@ -279,4 +288,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Category 14 — Build Tools & Project Structure (Maven fundamentals, multi-module structure, dependency management). Category 13 is complete as of Session 19. Category 12 (File I/O & NIO) remains open — JSON is deferred until Maven makes a real JSON library available.
+**Next up:** Session 21 — Category 14 remainder: multi-module project structure and dependency management basics. Maven fundamentals done as of Session 20. Category 12 (File I/O & NIO) remains open — JSON planned for Session 22 using a real library via Maven.
