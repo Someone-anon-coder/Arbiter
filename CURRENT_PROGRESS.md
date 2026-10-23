@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 14 — Build Tools & Project Structure — IN PROGRESS (Maven fundamentals done Session 20; multi-module + dependency management pending Session 21). Category 12 remains open pending JSON (Session 22). |
-| Current Concept | Maven fundamentals — standard layout, pom anatomy, lifecycle phases vs. plugin goals, dependency resolution and scopes, thin vs. fat jar (maven-shade-plugin). |
-| Concepts Completed | 12 / 32 (Category 12 remains open pending the JSON sub-item) |
-| Sessions Completed | 20 |
+| Current Roadmap Category | 14 — Build Tools & Project Structure — COMPLETE (Session 21). Next: Category 12 JSON sub-item (Session 22), then Category 15. |
+| Current Concept | Multi-module projects and dependency management — parent/child poms, reactor, dependencyManagement/pluginManagement, transitive scope, nearest-wins conflicts, exclusions, reactor vs. ~/.m2. |
+| Concepts Completed | 13 / 32 (Category 12 remains open pending the JSON sub-item) |
+| Sessions Completed | 21 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 21 — 2026-10-23
+- Phase: Daily Learning
+- Concept / Build Step: Category 14, remainder — multi-module projects and dependency management: parent/child poms and inheritance, reactor ordering, `-pl`/`-am`, `dependencyManagement` vs `dependencies` (and plugin equivalents), version properties, transitive scope, nearest-wins conflict resolution, exclusions, reactor vs. `~/.m2`; BOM import (concept only).
+- Problems given: (simple) `problem1/` parent + `lib` + `app`, `app` listed before `lib`, `mvn clean package` from root, run via `java -cp` with `lib/target/classes`, report real reactor order/summary / (hard) `problem2/` parent + `core`/`service`/`app` with all third-party and plugin versions central; verified conflict (commons-text 1.11.0 vs commons-compress 1.26.0 → commons-lang3 3.13.0 vs 3.14.0); resolve via dependencyManagement and via exclusion with trees; `-pl app package` failure from an uninstalled state then `-am`; final `java -cp` run using transitive `StringUtils`.
+- Outcome: Correct
+- Evaluation summary: All poms and code correct and verified by my own clean builds. Problem 1 builds and prints `multi-module works`, with reactor order parent, lib, app. Problem 2's baseline tree, both resolutions, the `-pl app package` failure (missing `service` artifact), the `-am` fix and the final four-line output all reproduced; resolved lang3 is 3.13.0 baseline and 3.14.0 under both fixes. Versions appear only in the parent (inter-module deps use `${project.version}`), and the written explanations of nearest-wins, management vs. dependencies, reactor order and pluginManagement were correct.
+- Struggles / notes: None
+- Next session should cover: Category 12 JSON sub-item (Session 22), using a real JSON library through Maven. Category 12 stays open until then.
 
 ### Session 20 — 2026-10-12
 - Phase: Daily Learning
@@ -248,7 +257,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
 | 12 | File I/O & NIO | 🟡 | (classic I/O + NIO + CSV done Session 17; JSON deferred pending Maven, Category 14) |
 | 13 | Data Structures & Algorithms | ✅ | 2026-10-09 |
-| 14 | Build Tools & Project Structure | 🟡 | (Maven fundamentals done Session 20; multi-module + dependency management pending Session 21) |
+| 14 | Build Tools & Project Structure | ✅ | 2026-10-23 |
 | 15 | JDBC & Relational DB Basics | ⬜ | |
 | 16 | Testing Fundamentals (JUnit 5) | ⬜ | |
 | 17 | Advanced Testing (Mockito, AssertJ, Testcontainers) | ⬜ | |
@@ -288,4 +297,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Session 21 — Category 14 remainder: multi-module project structure and dependency management basics. Maven fundamentals done as of Session 20. Category 12 (File I/O & NIO) remains open — JSON planned for Session 22 using a real library via Maven.
+**Next up:** Session 22 — Category 12 JSON sub-item using a real library via Maven. Category 14 completed in Session 21.

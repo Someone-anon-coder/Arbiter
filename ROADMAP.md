@@ -91,10 +91,10 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Sorting and searching algorithms
 - [x] Big-O reasoning applied to the above
 
-## 14. Build Tools & Project Structure ⬜
+## 14. Build Tools & Project Structure ✅
 - [x] Maven fundamentals (`pom.xml`, dependencies, lifecycle)
-- [ ] Multi-module project structure
-- [ ] Dependency management basics
+- [x] Multi-module project structure
+- [x] Dependency management basics
 
 ## 15. JDBC & Relational Database Basics ⬜
 - [ ] JDBC connections, `Statement` vs `PreparedStatement`
