@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 14 — Build Tools & Project Structure — COMPLETE (Session 21). Next: Category 12 JSON sub-item (Session 22), then Category 15. |
-| Current Concept | Multi-module projects and dependency management — parent/child poms, reactor, dependencyManagement/pluginManagement, transitive scope, nearest-wins conflicts, exclusions, reactor vs. ~/.m2. |
-| Concepts Completed | 13 / 32 (Category 12 remains open pending the JSON sub-item) |
-| Sessions Completed | 21 |
+| Current Roadmap Category | 12 — File I/O & NIO — COMPLETE (Session 22, JSON sub-item). Category 14 complete (Session 21). Next: Category 15 — JDBC & Relational DB Basics. |
+| Current Concept | JSON with Jackson — ObjectMapper, data binding, TypeReference, annotations, strict vs. lenient, java.time module, tree model, exception hierarchy, jackson-bom import. |
+| Concepts Completed | 14 / 32 |
+| Sessions Completed | 22 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 22 — 2026-11-06
+- Phase: Daily Learning
+- Concept / Build Step: Category 12, remaining sub-item (closes Category 12) — JSON with Jackson: three layers (streaming/databind/tree), `ObjectMapper` (single reused instance), binding to records/POJOs, `TypeReference` and type erasure, `@JsonProperty`/`@JsonIgnore`/`@JsonIgnoreProperties`/`@JsonInclude`, strict vs. lenient (`FAIL_ON_UNKNOWN_PROPERTIES`), missing vs. explicit null vs. unknown property, `JavaTimeModule` with `WRITE_DATES_AS_TIMESTAMPS` off, exception hierarchy (`JsonParseException` vs. `JsonMappingException`), `jackson-bom` import, NIO file access. Resolved version: Jackson 2.22.4 (`jackson-annotations` 2.22).
+- Problems given: (simple) `problem1/`: record `Device`, serialize/deserialize round trip, BOM-managed dependency tree / (hard) `problem2/`: bind `Files/json_orders/orders.json` (7 orders; nested customer and items; explicit null, missing email, unknown field, empty items array) with `TypeReference`; strict failure, lenient path, wrapped checked exception; per-customer report; write `customer_summary.json` with rename/ignore/NON_NULL and ISO dates; `readTree` extraction; two captured failure types with hierarchy chains.
+- Outcome: Correct
+- Evaluation summary: Both projects build cleanly from `mvn clean package` and my re-run output matched NOTES.md on every captured item that matters: strict `UnrecognizedPropertyException` (field `loyaltyPoints`, `ArrayList[3]`), report (194.48 / 106.99 / 324.43 / 0.00, grand total 625.90, 36 units, 80 days — equal to my independently computed values), `JsonEOFException` vs. `InvalidFormatException` with identical chains, major version 65, and dependency trees. The regenerated `customer_summary.json` is byte-identical to the author's file: ISO dates, `customer_name` rename, no `internalRank`, no `email` key for C-04, `0.00` kept. The BOM import is genuine (no per-artifact Jackson versions), plugins are pinned, `ObjectMapper`s are `static final`, files go through NIO, and the wrapped `OrderParseException` is checked, adds path context and keeps the cause. Only differences from NOTES.md: the Problem 1 tree is indented one space less than real Maven output, and the malformed string in the code has a trailing space that the spec lacked; both cosmetic.
+- Struggles / notes: None on concepts. Evidence discipline was good this time (contrast with Session 20).
+- Next session should cover: Category 15 — JDBC & Relational Database Basics.
 
 ### Session 21 — 2026-10-23
 - Phase: Daily Learning
@@ -255,7 +264,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 9 | Generics | ✅ | 2026-08-16 |
 | 10 | Java 8+ Functional Features | ✅ | 2026-08-21 |
 | 11 | Multithreading & Concurrency | ✅ | 2026-09-09 |
-| 12 | File I/O & NIO | 🟡 | (classic I/O + NIO + CSV done Session 17; JSON deferred pending Maven, Category 14) |
+| 12 | File I/O & NIO | ✅ | 2026-11-06 (classic I/O + NIO + CSV Session 17; JSON Session 22) |
 | 13 | Data Structures & Algorithms | ✅ | 2026-10-09 |
 | 14 | Build Tools & Project Structure | ✅ | 2026-10-23 |
 | 15 | JDBC & Relational DB Basics | ⬜ | |
@@ -297,4 +306,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Session 22 — Category 12 JSON sub-item using a real library via Maven. Category 14 completed in Session 21.
+**Next up:** Session 23 — Category 15: JDBC & Relational Database Basics. Category 12 completed in Session 22.

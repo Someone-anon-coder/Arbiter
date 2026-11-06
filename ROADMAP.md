@@ -79,10 +79,10 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] `CompletableFuture`
 - [x] Common concurrency pitfalls (race conditions, deadlocks)
 
-## 12. File I/O & NIO ⬜
+## 12. File I/O & NIO ✅
 - [x] Reading/writing files (classic I/O)
 - [x] `java.nio.file` (Path, Files)
-- [ ] Working with JSON/CSV in Java (CSV done — Session 17; JSON deferred pending Maven, Category 14)
+- [x] Working with JSON/CSV in Java (CSV done - Session 17; JSON done - Session 22)
 
 ## 13. Data Structures & Algorithms ✅
 - [x] Stacks, Queues
