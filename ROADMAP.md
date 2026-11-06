@@ -97,8 +97,8 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 - [x] Dependency management basics
 
 ## 15. JDBC & Relational Database Basics ⬜
-- [ ] JDBC connections, `Statement` vs `PreparedStatement`
-- [ ] CRUD via raw JDBC
+- [x] JDBC connections, `Statement` vs `PreparedStatement`
+- [x] CRUD via raw JDBC
 - [ ] Connection pooling concepts
 - [ ] SQL fundamentals as needed (joins, constraints, indexes)
 

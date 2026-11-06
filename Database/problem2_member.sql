@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS member;
+
+CREATE TABLE member (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    full_name VARCHAR(60) NOT NULL,
+    age INTEGER NOT NULL CONSTRAINT member_age_chk CHECK (age BETWEEN 13 AND 120),
+    phone VARCHAR(20),
+    loyalty_points INTEGER,
+    joined_on DATE NOT NULL
+);
