@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 12 — File I/O & NIO — COMPLETE (Session 22, JSON sub-item). Category 14 complete (Session 21). Next: Category 15 — JDBC & Relational DB Basics. |
-| Current Concept | JSON with Jackson — ObjectMapper, data binding, TypeReference, annotations, strict vs. lenient, java.time module, tree model, exception hierarchy, jackson-bom import. |
+| Current Roadmap Category | 15 — JDBC & Relational DB Basics — IN PROGRESS (Session 23: JDBC connections, Statement vs PreparedStatement, CRUD via raw JDBC). Remaining: joins/indexes/batching/transactions (Session 24), connection pooling (Session 25). Categories 1–14 complete. |
+| Current Concept | JDBC basics and CRUD — driver/API split, DriverManager, Connection as network session, Statement vs PreparedStatement and SQL injection, ResultSet cursor and NULL handling, generated keys, try-with-resources, SQLState-based exception translation, java.time DATE mapping. |
 | Concepts Completed | 14 / 32 |
-| Sessions Completed | 22 |
+| Sessions Completed | 23 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 23 — 2026-11-06
+- Phase: Daily Learning
+- Concept / Build Step: Category 15, part 1 of 3 — JDBC connections, `Statement` vs `PreparedStatement`, CRUD via raw JDBC, plus minimum SQL (CREATE TABLE, types, PK/identity, NOT NULL, UNIQUE, CHECK, DEFAULT). Environment: native PostgreSQL 16.15 (Docker not installed), driver `org.postgresql:postgresql` 42.7.14.
+- Problems given: (simple) `problem1/` + `Database/problem1_lab_item.sql`: table `lab_item`, re-runnable program, 3 PreparedStatement inserts (one using the DB default), SELECT, print, two identical runs / (hard) `problem2/` + `Database/problem2_member.sql`: `Member` record, `MemberDao` (create with generated key, findById/findByEmail as `Optional`, findAll, update with NULLs, delete), checked `MemberDataException` classified by SQLState, labeled-vulnerable concatenated method with the `' OR '1'='1` demo, scripted run with duplicate/CHECK/NOT NULL failures (identity values burned, so Alan gets id 7), NULL-vs-0 report with `LocalDate` day counts.
+- Outcome: Correct
+- Evaluation summary: Both projects build from `mvn clean package` with every plugin pinned and used at its pinned version; `maven.compiler.release` took effect (`[debug release 21]`, class-file major 65); driver resolves to 42.7.14. No credentials in any committed file (grepped repo incl. NOTES.md and SQL); connection comes only from the three env vars and a missing variable fails with a clear message. Every Statement/PreparedStatement/ResultSet is in try-with-resources; failures are classified by SQLState (`23505` -> DUPLICATE_KEY, other `23` -> CONSTRAINT_VIOLATION, else UNEXPECTED) and the exception message is a fixed safe string. I re-ran both programs twice each against a throwaway password-authenticated PostgreSQL 16.15 cluster loaded with the author's own SQL scripts: runs were identical, and output matched NOTES.md exactly (the only difference was a blank line before the closing code fence). All values match my hand-verified numbers (ids 1,2,3 and 7; update counts 1,1,0; injection 3 vs 0; 672/732/365 days; total 210, average 105.0, 1 NULL points, 1 NULL phone). NULL handled faithfully (`getObject(..., Integer.class)`, `setNull`); DATE round-trips as `LocalDate`. Schema enforcement confirmed by inserting violating rows directly in `psql`. The author's two written explanations (placeholder vs concatenation; close order and suppression) are correct.
+- Struggles / notes: None. Evidence discipline was good. Limits of my verification: the `ARBITER_DB_*` variables are not set in my shell, so I did NOT connect to the author's own database; I ran against my own throwaway cluster (same server version, same scripts). In the DAO the Connection is owned by `main`, so a failing statement closes only its PreparedStatement and the shared connection stays usable; that only holds in auto-commit mode (inside an explicit transaction PostgreSQL aborts the transaction after an error), which matters for Session 24.
+- Next session should cover: Category 15 continued — SQL joins, indexes, batching, and transactions (Session 24). Category 15 stays open pending Sessions 24 and 25.
 
 ### Session 22 — 2026-11-06
 - Phase: Daily Learning
@@ -267,7 +276,7 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 | 12 | File I/O & NIO | ✅ | 2026-11-06 (classic I/O + NIO + CSV Session 17; JSON Session 22) |
 | 13 | Data Structures & Algorithms | ✅ | 2026-10-09 |
 | 14 | Build Tools & Project Structure | ✅ | 2026-10-23 |
-| 15 | JDBC & Relational DB Basics | ⬜ | |
+| 15 | JDBC & Relational DB Basics | 🟡 | |
 | 16 | Testing Fundamentals (JUnit 5) | ⬜ | |
 | 17 | Advanced Testing (Mockito, AssertJ, Testcontainers) | ⬜ | |
 | 18 | Spring Core (IoC & DI) | ⬜ | |
@@ -306,4 +315,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Session 23 — Category 15: JDBC & Relational Database Basics. Category 12 completed in Session 22.
+**Next up:** Session 24 — Category 15 (continued): SQL joins, indexes, batching, and transactions. Session 25 will cover connection pooling and close Category 15. Category 15 is NOT complete.
