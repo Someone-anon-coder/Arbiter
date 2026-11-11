@@ -11,10 +11,10 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 |---|---|
 | Current Phase | Daily Learning Phase |
 | Project Build Phase Unlocked | No |
-| Current Roadmap Category | 15 — JDBC & Relational DB Basics — IN PROGRESS (Session 23: JDBC connections, Statement vs PreparedStatement, CRUD via raw JDBC). Remaining: joins/indexes/batching/transactions (Session 24), connection pooling (Session 25). Categories 1–14 complete. |
+| Current Roadmap Category | 15 — JDBC & Relational DB Basics — IN PROGRESS (Session 23: JDBC connections, Statement vs PreparedStatement, CRUD via raw JDBC). Session 24: joins/indexes/batching/transactions done. Remaining: connection pooling (Session 25). Categories 1–14 complete. |
 | Current Concept | JDBC basics and CRUD — driver/API split, DriverManager, Connection as network session, Statement vs PreparedStatement and SQL injection, ResultSet cursor and NULL handling, generated keys, try-with-resources, SQLState-based exception translation, java.time DATE mapping. |
 | Concepts Completed | 14 / 32 |
-| Sessions Completed | 23 |
+| Sessions Completed | 24 |
 | Start Date | 2026-07-31 |
 | Days Elapsed | 0 |
 | Target Duration | 25–30 days |
@@ -32,6 +32,15 @@ This file is the continuity thread between sessions. Claude Code reads it at the
 ## Session Log
 
 *Most recent session first. Copy the template below for each new entry.*
+
+### Session 24 — 2026-11-11
+- Phase: Daily Learning
+- Concept / Build Step: Category 15, part 2 of 3 — SQL joins (INNER/LEFT, the LEFT JOIN + WHERE trap, FKs and `ON DELETE`, `COUNT(col)` vs `COUNT(*)`), B-tree indexes and reading `EXPLAIN (ANALYZE)`, JDBC batching (`addBatch`/`executeBatch`, `reWriteBatchedInserts`), JDBC transactions (commit/rollback, savepoints, the PostgreSQL aborted-transaction rule `25P02`, isolation levels). Environment: native PostgreSQL 16.15, driver `org.postgresql:postgresql` 42.7.14.
+- Problems given: (simple) `problem1/` + `Database/problem1_join.sql`: department/employee with FK `ON DELETE SET NULL`, INNER and two LEFT JOINs plus a per-department `COUNT(e.id)` report via PreparedStatement, row counts 6/7/8/4, re-runnable / (hard) `problem2/` + `Database/problem2_accounts.sql`, `problem2_index.sql`: four runnable classes — `TransferDemo` (transactional transfer, custom checked exceptions by SQLState 23514, missing target detected at the credit step, proof on fresh connections, captured 25P02), `SavepointDemo` (ids 1/4/5), `IsolationDemo` (READ COMMITTED vs REPEATABLE READ, READ UNCOMMITTED experiment), `BatchAndIndexDemo` (20,000 rows row-by-row vs batch vs batch with `reWriteBatchedInserts`) plus a 300,000-row index exercise with `EXPLAIN (ANALYZE)` before/after a plain index and an expression index on `lower(email)`.
+- Outcome: Correct
+- Evaluation summary: Both projects build with every plugin pinned (`[debug release 21]`, class-file major 65, driver 42.7.14); no credentials in any committed file. I re-ran every key command and the output matched NOTES.md exactly except timings: problem 1 (6/7/8/4 rows, `Legal | 0`, identical across two runs, `\d` output identical), `TransferDemo`, `SavepointDemo` and `IsolationDemo` (all line-for-line, each identical across two runs), the batch counts/sums/array lengths/distinct values (`[1]` vs `[-2]`), and all four EXPLAIN plan-node families. `transfer` is genuinely transactional: auto-commit off, commit and rollback present, rollback in a `finally` guarded by a `committed` flag, auto-commit restored after the rollback, connection closed by try-with-resources, rollback proven on fresh connections. I forced failures in a scratch copy: an unchecked exception after the credit left balances and the log unchanged, and removing the `rollback()` call let `setAutoCommit(true)` commit the half-finished transfer (Alice 750, Bob 350, no log row), which confirms the rollback is what protects the data. Timings differ run to run, as expected: notes 760/152/95 ms (5.00x, 8.00x), my runs 535-605 / 147-166 / 73-78 ms (3.5-3.9x, 6.9-8.3x); same direction and order of magnitude. The written explanations (LEFT JOIN trap, 25P02 vs auto-commit, batching round trips, why a planner ignores an index, identity gaps, anomalies per level) were correct. Two small real points: `BatchAndIndexDemo` runs an untimed 2,000-row warm-up pass that NOTES.md does not mention (harmless, since it does not favor the batch, but a timing method should be disclosed); and the answer to "why does PostgreSQL refuse further statements" gave the mechanism (transaction marked aborted) but not the reason (atomicity: after a failed statement the server will not let the rest be committed as if nothing happened).
+- Struggles / notes: None on concepts. Evidence discipline was good. Limits of my verification: despite the author confirming the check, the `ARBITER_DB_*` variables (`ARBITER_DB_URL`, `ARBITER_DB_USER`, `ARBITER_DB_PASSWORD`) were still not visible in my shell, and the real cluster on 5432 rejects passwordless access, so I did NOT connect to the author's own database; I ran against my own throwaway scratch cluster (PostgreSQL 16.15, port 55432, database `arbiter_eval`) loaded with the author's own SQL scripts. I cannot confirm that NOTES.md output was produced on the author's database, only that it reproduces on an identical server version and driver.
+- Next session should cover: Category 15 remainder — connection pooling concepts (Session 25). Category 15 stays open.
 
 ### Session 23 — 2026-11-06
 - Phase: Daily Learning
@@ -315,4 +324,4 @@ Mirrors `ROADMAP.md`. Status values: ⬜ Not Started · 🟡 In Progress · ✅ 
 
 ## Next Session
 
-**Next up:** Session 24 — Category 15 (continued): SQL joins, indexes, batching, and transactions. Session 25 will cover connection pooling and close Category 15. Category 15 is NOT complete.
+**Next up:** Session 25 — Category 15 (continued): connection pooling concepts. This will close Category 15. Category 15 is NOT complete until then.
