@@ -1,0 +1,34 @@
+DROP TABLE IF EXISTS transfer_log;
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS sp_demo;
+DROP TABLE IF EXISTS batch_item;
+
+CREATE TABLE account (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    owner TEXT NOT NULL,
+    balance NUMERIC(12,2) NOT NULL CHECK (balance >= 0)
+);
+
+CREATE TABLE transfer_log (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    from_id BIGINT NOT NULL REFERENCES account(id),
+    to_id BIGINT NOT NULL REFERENCES account(id),
+    amount NUMERIC(12,2) NOT NULL CHECK (amount > 0),
+    logged_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE sp_demo (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    label TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE batch_item (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    code TEXT NOT NULL,
+    qty INT NOT NULL
+);
+
+INSERT INTO account (owner, balance) VALUES
+    ('Alice', 1000.00),
+    ('Bob', 100.00),
+    ('Carol', 0.00);

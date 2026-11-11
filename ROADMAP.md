@@ -99,8 +99,10 @@ Legend: ✅ Complete · 🟡 In Progress · ⬜ Not Started
 ## 15. JDBC & Relational Database Basics ⬜
 - [x] JDBC connections, `Statement` vs `PreparedStatement`
 - [x] CRUD via raw JDBC
+- [x] Batching (`addBatch`/`executeBatch`)
+- [x] Transactions (commit/rollback/savepoints/isolation via JDBC)
 - [ ] Connection pooling concepts
-- [ ] SQL fundamentals as needed (joins, constraints, indexes)
+- [x] SQL fundamentals as needed (joins, constraints, indexes)
 
 ## 16. Testing Fundamentals (JUnit 5) ⬜
 - [ ] Test structure, annotations (`@Test`, `@BeforeEach`, etc.)
